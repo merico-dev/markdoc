@@ -130,7 +130,7 @@ Headings and paragraph also support the inclusion of custom variable placeholder
 - You should only use: `a-z`/`A-Z`/`0-9`/`_`
 - Must start with `a-z` or `A-Z`
 
-The main purpose of this feature is to support future value replacement (e.g., expert systems may have this requirement), which needs to be used with the corresponding front-end code and is not open for support for the time being.
+The main purpose of this feature is to support future value replacement (e.g., expert systems may have this requirement), which needs to be used with the corresponding front-end code and need to be analyzed by the front-end.
 
 ### Style
 
