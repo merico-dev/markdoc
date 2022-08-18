@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { keyBy } from "lodash-es";
+import dotenv from "dotenv";
 
 import { readAndParseMarkdownDocs } from "./parser/main.js";
 import { serve } from "./server/main.js";
@@ -17,6 +18,7 @@ function readAllDocs() {
 }
 
 function run() {
+  dotenv.config();
   const allDocs = readAllDocs();
   serve(allDocs);
 }

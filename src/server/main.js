@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { Server } from "@hapi/hapi";
 import HapiPino from "hapi-pino";
 
@@ -38,7 +37,6 @@ async function startServer(serverInstance) {
 }
 
 export async function serve(allDocs) {
-  dotenv.config();
   const server = initServer();
   decorateServer(server, allDocs);
   await registerPlugins(server);
