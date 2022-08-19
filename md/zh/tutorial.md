@@ -134,11 +134,11 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 
 ### 样式
 
-目前从 Markdown 生成的 HTML 文档内置了 [GitHub Markdown 的样式](https://github.com/sindresorhus/github-markdown-css)，如果有需要，将来可以换成我们自己的样式。
+目前使用我们自己的 `npm run build` 命令编译 Markdown，生成的 HTML 文档会内置 [GitHub Markdown 的样式](https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-light.css)，如果有需要，将来可以换成我们自己的样式。
 
 ### 代码高亮
 
-目前从 Markdown 生成的 HTML 文档内置了 GitHub Markdown 的代码高亮样式，如果有需要，可以删除代码高亮功能。
+目前使用我们自己的 `npm run build` 命令编译 Markdown，生成的 HTML 文档会内置 [GitHub Markdown 的代码高亮样式](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css)，如果有需要，可以替换为我们自己的代码高亮样式或者删除代码高亮功能。
 
 ### 文档分块
 
