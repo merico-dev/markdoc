@@ -6,13 +6,13 @@ marked.setOptions({
 });
 
 const CUSTOM_ID_MATCH_REGEX = /\{\[:( ?[a-z_][\w -]*)\]\}/i;
-const CUSTOM_ID_REPLACE_REGEX = new RegExp(CUSTOM_ID_MATCH_REGEX, "gi");
+const CUSTOM_ID_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_ID_MATCH_REGEX, "gi");
 
 const CUSTOM_KEYWORD_MATCH_REGEX = /\{\[;( ?[a-z_][\w -]*)\]\}/i;
-const CUSTOM_KEYWORD_REPLACE_REGEX = new RegExp(CUSTOM_KEYWORD_MATCH_REGEX, "gi");
+const CUSTOM_KEYWORD_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_KEYWORD_MATCH_REGEX, "gi");
 
 // const CUSTOM_VAR_MATCH_REGEX = /\{\[@( ?[a-z_][\w ]*)\]\}/i;
-// const CUSTOM_VAR_REPLACE_REGEX = new RegExp(CUSTOM_VAR_MATCH_REGEX, "gi");
+// const CUSTOM_VAR_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_VAR_MATCH_REGEX, "gi");
 
 function appendCustomAttributes(text) {
   let attr = "";
@@ -21,11 +21,11 @@ function appendCustomAttributes(text) {
   const keywordMatched = text.match(CUSTOM_KEYWORD_MATCH_REGEX);
   if (idMatched) {
     attr += ` id="${trim(idMatched[1])}"`;
-    content = content.replace(CUSTOM_ID_REPLACE_REGEX, "");
+    content = content.replace(CUSTOM_ID_MATCH_GLOBAL_REGEX, "");
   }
   if (keywordMatched) {
     attr += ` data-keywords="${trim(keywordMatched[1])}"`;
-    content = content.replace(CUSTOM_KEYWORD_REPLACE_REGEX, "");
+    content = content.replace(CUSTOM_KEYWORD_MATCH_GLOBAL_REGEX, "");
   }
   return { attr, content };
 }

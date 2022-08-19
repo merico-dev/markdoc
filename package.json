@@ -9,8 +9,8 @@
     "lint": "eslint ./src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Merico", "markdown", "document"],
+  "author": "Dingding Zhang",
   "private": true,
   "license": "ISC",
   "type": "module",
