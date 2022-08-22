@@ -107,7 +107,7 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 
 ### 向标题和段落中添加自定义关键字
 
-标题和段落还支持加入自定义的 Keywords，用于表示该元素的一些附加属性，该 Keywords 会赋给编译后对应的 HTML 元素。语法规则为使用 `{[;` 和 `]}` 括起来的一串字符。自定义关键字支持一次赋予多个 Keyword，不同的 Keyword 字符串之间以空格分割。单个 Keyword 字符串的命名规则同 ID 的命名规则。
+标题和段落还支持加入自定义的 Keywords，用于表示该元素的一些附加属性，该 Keywords 会赋给编译后对应的 HTML 元素。语法规则为使用 `{[;` 和 `]}` 括起来的一串字符。自定义关键字支持一次赋予多个 Keyword，不同的 Keyword 字符串之间以*空格*分割。单个 Keyword 字符串的命名规则同 ID 的命名规则。
 
 例如下面的 Markdown 文档：
 
@@ -163,4 +163,6 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 - [Markdown Wiki](https://zh.wikipedia.org/wiki/Markdown)
 - [CommonMark](https://commonmark.org/)
 - [Markdown 的标准化之路](https://www.infoq.cn/article/2014/09/markdown-commonmark)
+- [CommonMark: A Formal Specification For Markdown](https://www.smashingmagazine.com/2020/12/commonmark-formal-specification-markdown/)
+- [A formal spec for GitHub Flavored Markdown](https://github.blog/2017-03-14-a-formal-spec-for-github-markdown/)
 - [在 GitHub 上编写——基本撰写和格式语法](https://docs.github.com/cn/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)

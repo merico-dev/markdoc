@@ -107,7 +107,7 @@ II. The ID list in a document should not repeat (this is well understood, otherw
 
 ### Add custom keywords to headings and paragraph
 
-Headings and paragraph also support the inclusion of custom keywords to indicate some additional attributes of the element, which is assigned to the compiled HTML element. The syntax rule is a string of characters enclosed in `{[;` and `]}`. Custom attributes can be assigned to multiple keywords at once, with the different keyword string separated by spaces. The naming convention for individual keyword is the same as that for ID.
+Headings and paragraph also support the inclusion of custom keywords to indicate some additional attributes of the element, which is assigned to the compiled HTML element. The syntax rule is a string of characters enclosed in `{[;` and `]}`. Custom attributes can be assigned to multiple keywords at once, with the different keyword string separated by *space*. The naming convention for individual keyword is the same as that for ID.
 
 For example, the following Markdown document:
 
@@ -163,4 +163,6 @@ If you want to reference a static resource such as an image in a document, pleas
 - [Markdown Wiki](https://en.wikipedia.org/wiki/Markdown)
 - [CommonMark](https://commonmark.org/)
 - [Standard Markdown Becomes Common Markdown then CommonMark](https://www.infoq.com/news/2014/09/markdown-commonmark/)
+- [CommonMark: A Formal Specification For Markdown](https://www.smashingmagazine.com/2020/12/commonmark-formal-specification-markdown/)
+- [A formal spec for GitHub Flavored Markdown](https://github.blog/2017-03-14-a-formal-spec-for-github-markdown/)
 - [Writing on GitHub - Basic writing and formatting syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)

@@ -13,21 +13,26 @@
 - Node.JS >= 14.19
 - 拉取完本仓库之后请在根目录执行 `npm install`
 
+如果只是「编写文档」，则无需这么麻烦，有一个文本编辑器就可以了。
+
 ### 如何编写文档？
 
 基本上，我们的文档采用 Markdown 编写，然后在此基础上对 Markdown 的语法进行了一些扩展。关于文档的语法规范设计请见 [初学者教程](./md/zh/tutorial.md) 或者 [Tutorial for beginners](./md/en/tutorial.md)。
 
-编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。
+编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。有一点需要注意，Markdown 文档的命名须遵循以下规则：
+
+- 文件名字符仅支持：`小写英文字母`/`数字`/`-`
+- 必须以小写英文字母打头
 
 ### 如何编译文档并预览？
 
-如果想查看 Markdown 转换后的 HTML 文档，可以运行以下命令：
+如果想查看 Markdown 转换后的 HTML 文档效果，可以运行以下命令：
 
 ```sh
 npm run build
 ```
 
-该命令会在 `public/build/` 下生成对应的 HTML 文档。
+该命令会在 `public/build/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。
 
 ### 如何启动一个 HTTP Server 来提供文档？
 
