@@ -6,7 +6,6 @@
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
   "tags": ["效率与稳定性"],
-  "about": ""
 }
 ---
 # 效率与稳定性
