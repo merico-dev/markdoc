@@ -6,7 +6,6 @@
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
   "tags": ["忙闲度", "人力负载"],
-  "about": ""
 }
 ---
 # 开发活动热力图
