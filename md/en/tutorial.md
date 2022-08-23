@@ -64,6 +64,8 @@ Front Matter, the first page of a book after it is opened. In Markdown, Front Ma
 
 These information do not appear in the HTML compiled by Markdown and is only used to provide document meta information.
 
+> The syntax specification of YAML/JSON/TOML is not too much elaborated here, please check the relevant syntax specification document by yourself.
+
 ### Add custom ID to headings and paragraph
 
 Headings and paragraph support the inclusion of a custom ID that is assigned to the compiled HTML element. The syntax rule is a string of characters enclosed in `{[:` and `]}`, and the naming of the string should follow the following rules:
@@ -84,6 +86,8 @@ will be compiled as:
 ```html
 <p id="tt4034228">Manchester by the Sea, a psychological drama film directed by Kenneth Lonergan, was released in the U.S. on November 18, 2016.</p>
 ```
+
+> Note: Characters like `{` `[` `:` `]` `}`, these characters are used for **syntactic parsing** and are all **halfwidth forms**, do not use fullwidth forms. In fact, please use halfwidth forms when characters were used for syntactic parsing. For example, Markdown syntax characters, HTML syntax characters, JSON syntax characters, characters from our custom syntax, etc., should all use halfwidth forms.
 
 In addition, there are some areas to note:
 
