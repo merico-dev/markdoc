@@ -6,7 +6,6 @@
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
   "tags": ["代码贡献均衡度"],
-  "about": ""
 }
 ---
 # 贡献者帕累托
