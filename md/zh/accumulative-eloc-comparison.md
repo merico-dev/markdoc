@@ -6,7 +6,7 @@
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
   "tags": ["代码当量", "累积"],
-  "about": "https://github.com/merico-dev/ee-metric-help-doc/blob/main/md/zh/sample.md"
+  "about": 
 }
 ---
 # 累积当量趋势
