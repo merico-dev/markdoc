@@ -1,12 +1,10 @@
-```
 ---
 {
   "title": "累积当量趋势",
   "desc": "代码当量的累积趋势",
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
-  "tags": ["代码当量", "累积"],
-  "about": 
+  "tags": ["代码当量", "累积"]
 }
 ---
 # 累积当量趋势
@@ -44,7 +42,3 @@ Blah blah...
 ## 常见问题
 
 Blah blah...
-
-## 其他
-
-```
