@@ -6,7 +6,6 @@
   "created_at": "2022-08-22",
   "authors": ["caixia.zhang.zhang@merico.dev"],
   "tags": ["产出均衡"],
-  "about": ""
 }
 ---
 # 效率箱线图
