@@ -10,6 +10,9 @@ function initServer() {
     routes: {
       cors: true,
     },
+    state: {
+      strictHeader: false,
+    },
   });
   return server;
 }
