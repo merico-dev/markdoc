@@ -11,8 +11,7 @@
   },
   "keywords": ["Merico", "markdown", "document"],
   "author": "Dingding Zhang",
-  "private": true,
-  "license": "ISC",
+  "license": "Apache-2.0",
   "type": "module",
   "engines": {
     "node": ">=14.19.0",
