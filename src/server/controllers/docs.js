@@ -24,9 +24,7 @@ export function retrieveDocs(criteria, htmlDocs) {
     const fragment = JSDOM.fragment(doc.data);
     item.sections.forEach(section => {
       const element = fragment.querySelector(`[data-section=${section}]`);
-      if (element) {
-        result.data.push(element.outerHTML);
-      }
+      result.data.push(element?.outerHTML);
     });
     results.push(result);
   });
