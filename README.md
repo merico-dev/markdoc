@@ -29,7 +29,7 @@
 如果想查看 Markdown 转换后的 HTML 文档效果，可以运行以下命令：
 
 ```sh
-npm run build
+npm run parse
 ```
 
 该命令会在 `public/build/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。

@@ -138,11 +138,11 @@ The main purpose of this feature is to support future value replacement (e.g., e
 
 ### Style
 
-Currently, using our own `npm run build` to compile Markdown, the generated HTML document will have [GitHub Markdown Styles](https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-light.css) built in, but you can switch to our own styles in the future.
+Currently, using our own `npm run parse` to compile Markdown, the generated HTML document will have [GitHub Markdown Styles](https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-light.css) built in, but you can switch to our own styles in the future.
 
 ### Code highlighting
 
-Currently, using our own `npm run build` to compile Markdown, the generated HTML document will have [GitHub Markdown's code highlighting styles](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) built in, but you can switch to our own code highlighting styles or remove code highlighting if needed.
+Currently, using our own `npm run parse` to compile Markdown, the generated HTML document will have [GitHub Markdown's code highlighting styles](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) built in, but you can switch to our own code highlighting styles or remove code highlighting if needed.
 
 ### Document section
 
