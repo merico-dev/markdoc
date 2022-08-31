@@ -1,7 +1,7 @@
 {
   "name": "ee-metric-help-doc",
-  "version": "1.1.4",
-  "description": "build markdown to html",
+  "version": "1.1.5",
+  "description": "parse markdown to html",
   "exports": "./src/index.js",
   "scripts": {
     "parse": "node ./src/parse.js",

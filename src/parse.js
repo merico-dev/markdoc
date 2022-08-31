@@ -6,11 +6,11 @@ import { writeFiles } from "./misc.js";
 import { readAndParseMarkdownDocs } from "./parser/main.js";
 
 const MARKDOWN_READ_PATH = "../md";
-const MARKDOWN_WRITE_PATH = "../public/build";
+const MARKDOWN_WRITE_PATH = "../public/docs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-function cleanBuildDir(buildPath) {
-  fs.rmSync(buildPath, { recursive: true, force: true });
+function cleanTargetDir(targetPath) {
+  fs.rmSync(targetPath, { recursive: true, force: true });
 }
 
 function writeHtmlDocs(htmlDocs) {
@@ -27,7 +27,7 @@ function run() {
     decorate: true,
     minify: true,
   });
-  cleanBuildDir(path.join(__dirname, MARKDOWN_WRITE_PATH));
+  cleanTargetDir(path.join(__dirname, MARKDOWN_WRITE_PATH));
   writeHtmlDocs(htmlDocs);
 }
 

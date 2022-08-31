@@ -32,7 +32,7 @@
 npm run parse
 ```
 
-该命令会在 `public/build/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。
+该命令会在 `public/docs/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。
 
 ### 如何启动一个 HTTP Server 来提供文档？
 
@@ -53,6 +53,6 @@ npm run serve
 
 即可启动文档服务器。
 
-> 你也可以在启动服务器时传入 `BUILD_VERSION` 和 `BUILD_HASH` 环境变量，这样你可以通过相关 API 来获取服务器运行时的版本号。
+> 你也可以在启动服务器时传入 `BUILD_VERSION` 和 `BUILD_HASH` 环境变量（或构建时动态写入到 `.env` 中），这样你可以通过相关 API 来获取服务器运行/构建时的版本信息。
 
 服务器 API 可参见 [API](./api.md)。

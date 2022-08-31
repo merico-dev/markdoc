@@ -36,7 +36,7 @@ async function registerPlugins(serverInstance) {
 
 async function startServer(serverInstance) {
   await serverInstance.start();
-  console.log(`\nServer ${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
+  console.log(`\nServer@${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
 }
 
 export async function serve(allDocs) {
