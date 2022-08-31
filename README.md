@@ -53,4 +53,6 @@ npm run serve
 
 即可启动文档服务器。
 
-> 服务器 API 可参见 [API](./api.md)。
+> 你也可以在启动服务器时传入 `BUILD_VERSION` 和 `BUILD_HASH` 环境变量，这样你可以通过相关 API 来获取服务器运行时的版本号。
+
+服务器 API 可参见 [API](./api.md)。

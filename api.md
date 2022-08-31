@@ -2,6 +2,34 @@
 
 API 解释说明。
 
+---
+
+### `GET` api/v1/version
+
+**描述**
+
+获取服务器代码的版本信息。
+
+**参数**
+
+无
+
+**返回值**
+
+```json
+{
+  "packageVersion": "1.1.3",
+  "buildVersion": "v1.1.3",
+  "buildHash": "07f275d35f95d9e2ed11edec4447811163ca66de"
+}
+```
+
+- `packageVersion` 表示 NPM 软件包版本号，该值来源于 `package.json` 中的 `version` 字段。
+- `buildVersion` 表示构建代码的（可读）版本号，该值来源于启动服务器时传入的 `BUILD_VERSION` 环境变量。若启动时未传入 `BUILD_VERSION` 环境变量，则该值为 `undefined`。
+- `buildHash` 表示构建代码所对应的提交哈希值，该值来源于启动服务器时传入的 `BUILD_HASH` 环境变量。若启动时未传入 `BUILD_HASH` 环境变量，则该值为 `undefined`。
+
+---
+
 ### `POST` api/v1/docs
 
 **描述**
@@ -10,7 +38,7 @@ API 解释说明。
 
 **参数**
 
-```
+```json
 [
   {
     "lang": "zh",
