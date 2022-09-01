@@ -3,7 +3,7 @@
   "title": "效率箱线图",
   "desc": "成员产出是否均衡",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["产出均衡"]
 }
 ---

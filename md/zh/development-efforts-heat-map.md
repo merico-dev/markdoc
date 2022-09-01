@@ -3,7 +3,7 @@
   "title": "开发活动热力图",
   "desc": "项目成员的忙闲程度",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["忙闲度", "人力负载"]
 }
 ---

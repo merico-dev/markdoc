@@ -3,7 +3,7 @@
   "title": "新增当量趋势",
   "desc": "代码当量的新增趋势",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["代码当量", "新增"]
 }
 ---

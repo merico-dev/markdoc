@@ -3,7 +3,7 @@
   "title": "当量占比",
   "desc": "成员代码贡献的集中程度",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["代码贡献均衡度","成员代码贡献集中程度"]
 }
 ---
