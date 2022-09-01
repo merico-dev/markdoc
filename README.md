@@ -36,6 +36,8 @@ npm run parse
 
 ### 如何启动一个 HTTP Server 来提供文档？
 
+你也可以启动一个 Server 来通过 HTTP 协议向外提供文档，该 Server 会直接读取 Markdown 文档，然后按照指定参数返回文档信息和编译好的 HTML 内容（或内容片段）。
+
 首先在根目录创建一个 `.env` 的环境变量配置：
 
 ```
