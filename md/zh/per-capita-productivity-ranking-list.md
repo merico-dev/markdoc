@@ -3,7 +3,7 @@
   "title": "人均生产率排行",
   "desc": "人均产出效率",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["人均产出效率"]
 }
 ---

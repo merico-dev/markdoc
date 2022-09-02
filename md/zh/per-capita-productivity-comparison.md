@@ -3,7 +3,7 @@
   "title": "人均生产率趋势",
   "desc": "人均代码当量的趋势",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["人均代码当量", "人均生产率","人均产出效率"]
 }
 ---
