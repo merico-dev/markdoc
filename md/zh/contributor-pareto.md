@@ -3,7 +3,7 @@
   "title": "贡献者帕累托图",
   "desc": "成员代码贡献是否均衡",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["代码贡献均衡度"]
 }
 ---

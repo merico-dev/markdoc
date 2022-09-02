@@ -3,7 +3,7 @@
   "title": "效率与稳定性",
   "desc": "在开发过程中的效率稳定性",
   "created_at": "2022-08-22",
-  "authors": ["caixia.zhang.zhang@merico.dev"],
+  "authors": ["caixia.zhang@merico.dev"],
   "tags": ["效率与稳定性"]
 }
 ---
