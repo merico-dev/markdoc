@@ -1,0 +1,18 @@
+image: node:14.19.0
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+pages:
+  stage: deploy
+  script:
+    - echo 'Deploy started.'
+    - npm install
+    - npm run build
+    - echo 'Deploy finished.'
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "release"
