@@ -4,12 +4,21 @@ workflow:
   rules:
     - if: $CI_COMMIT_BRANCH
 
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
 pages:
   stage: deploy
   script:
     - echo 'Deploy started.'
-    - npm install
-    - npm run build
+    - npm run parse
     - echo 'Deploy finished.'
   artifacts:
     paths:

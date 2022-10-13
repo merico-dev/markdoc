@@ -9,7 +9,11 @@
     "lint": "eslint ./src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["Merico", "markdown", "document"],
+  "keywords": [
+    "Merico",
+    "markdown",
+    "document"
+  ],
   "author": "Dingding Zhang",
   "license": "Apache-2.0",
   "type": "module",
