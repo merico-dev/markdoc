@@ -35,19 +35,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14.19
-          cache: "npm"
+          cache: 'npm'
       - name: Install
         run: npm ci
       - name: Build
         run: npm run parse
       - name: Upload
         uses: actions/upload-pages-artifact@v1
-        if: ${{ github.ref_name == "release" }}
+        if: ${{ github.ref_name == 'release' }}
         with:
           path: public
       - name: Deploy
         id: deployment
-        if: ${{ github.ref_name == "release" }}
+        if: ${{ github.ref_name == 'release' }}
         uses: actions/deploy-pages@v1
       - name: Completed
         run: echo "→ Completed"
