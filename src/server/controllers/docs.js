@@ -9,6 +9,7 @@ export function retrieveDocs(criteria, htmlDocs) {
     const docKey = `${item.lang}/${item.key}.html`;
     const doc = htmlDocs[docKey];
     if (!doc) {
+      results.push(null);
       return;
     }
     const result = {
