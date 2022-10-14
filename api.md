@@ -41,8 +41,9 @@ API 解释说明。
 ```json
 [
   {
-    "lang": "zh",
     "key": "test",
+    "lang": "zh",
+    "version": 3,
     "sections": [
       "awards"
     ]
@@ -50,8 +51,9 @@ API 解释说明。
 ]
 ```
 
-- `lang` 表示要获取的文档的语言，目前支持 `zh`/`en` 两种。
 - `key` 表示要获取的文档的唯一标识符，这个 `key` 要和文档的文件名一致。
+- `lang` 表示要获取的文档的语言，目前支持 `zh`/`en` 两种。
+- `version` 可选参数，要获取的文档的版本，如果传入了 `version`，则 `version` 必须为正整数（且小于 2^53），否则该参数会被忽略。
 - `sections` 可选参数，表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
 
 **返回值**
@@ -60,8 +62,9 @@ API 解释说明。
 [
   {
     "criterion": {
-      "lang": "zh",
       "key": "test",
+      "lang": "zh",
+      "version": 3,
       "sections": [
         "awards"
       ]

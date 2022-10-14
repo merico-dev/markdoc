@@ -35,3 +35,7 @@ export function writeFiles(files) {
     fs.writeFileSync(item.path, item.data, DOC_ENCODING);
   });
 }
+
+export function isFileVersionValid(version) {
+  return Number.isSafeInteger(version) && version >= 1;
+}

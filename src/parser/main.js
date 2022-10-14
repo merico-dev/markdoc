@@ -1,6 +1,6 @@
 import path from "path";
 
-import { readFilePathListSync } from "../misc.js";
+import { readFilePathListSync, isFileVersionValid } from "../misc.js";
 
 import { readAndParseFrontMatter } from "./front-matter.js";
 import { parseMarkdown } from "./markup.js";
@@ -35,6 +35,8 @@ function parseMarkdownDocs(markdownDocs, options = {
   markdownDocs.forEach(item => {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
+    const splitNameInfo = name.split("@");
+    const fileVersionNum = Number(splitNameInfo[1]);
 
     // parse markdown
     let html = parseMarkdown(data.content);
@@ -53,6 +55,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
+      fileVersion: isFileVersionValid(fileVersionNum) ? fileVersionNum : null,
       info: data.data,
       data: html,
     });
