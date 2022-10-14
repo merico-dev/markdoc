@@ -39,3 +39,14 @@ export function writeFiles(files) {
 export function isFileVersionValid(version) {
   return Number.isSafeInteger(version) && version >= 1;
 }
+
+export function splitOnce(str, separator) {
+  if (typeof str !== "string" || typeof separator !== "string" || !separator) {
+    return [str];
+  }
+  const index = str.indexOf(separator);
+  if (index < 0) {
+    return [str];
+  }
+  return [str.slice(0, index), str.slice(index + 1)];
+}

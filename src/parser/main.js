@@ -1,6 +1,6 @@
 import path from "path";
 
-import { readFilePathListSync, isFileVersionValid } from "../misc.js";
+import { readFilePathListSync, isFileVersionValid, splitOnce } from "../misc.js";
 
 import { readAndParseFrontMatter } from "./front-matter.js";
 import { parseMarkdown } from "./markup.js";
@@ -35,7 +35,7 @@ function parseMarkdownDocs(markdownDocs, options = {
   markdownDocs.forEach(item => {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
-    const splitNameInfo = name.split("@");
+    const splitNameInfo = splitOnce(name, "@");
     const fileVersionNum = Number(splitNameInfo[1]);
 
     // parse markdown
