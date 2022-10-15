@@ -9,6 +9,10 @@ export function retrieveDocs(criteria, htmlDocs) {
   const results = [];
   criteria.forEach(item => {
     const docKey = deriveHTMLDocKeyFromDocInfo(item.key, item.lang, item.version);
+    if (!docKey) {
+      results.push(null);
+      return;
+    }
     const doc = htmlDocs[docKey];
     if (!doc) {
       results.push(null);
@@ -16,7 +20,7 @@ export function retrieveDocs(criteria, htmlDocs) {
     }
     const result = {
       criterion: item,
-      fileVersion: doc.fileVersion,
+      version: doc.version,
       info: doc.info,
       data: [],
     };

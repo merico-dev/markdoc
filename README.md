@@ -17,7 +17,7 @@
 
 ### 如何编写文档？
 
-基本上，我们的文档采用 Markdown 编写，然后在此基础上对 Markdown 的语法进行了一些扩展。关于文档的语法规范设计请见 [初学者教程](./md/zh/tutorial.md) 或者 [Tutorial for beginners](./md/en/tutorial.md)。
+基本上，我们的文档采用 Markdown 编写，然后在此基础上对 Markdown 的语法进行了一些扩展。关于文档的语法规范设计请见[初学者教程](./md/zh/tutorial.md)或者 [Tutorial for beginners](./md/en/tutorial.md)。
 
 编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。有一点需要注意，Markdown 文档的命名须遵循以下规则：
 
@@ -25,7 +25,7 @@
 - 文件名必须以小写英文字母打头
 - 文档格式的后缀为 `.md`
 
-> 特别的，我们还支持在文件名中使用 `@ 字符后跟数字` 来表示文档版本，具体说明可见 [文档版本设计说明](./doc-version.md)。
+> 特别的，我们还支持在文件名中使用 `@ 字符后跟数字` 来表示文档版本，具体说明可见[文档版本设计说明](./doc-version.md)。
 
 ### 如何编译文档并预览？
 

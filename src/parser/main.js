@@ -55,7 +55,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
-      fileVersion: isFileVersionValid(fileVersionNum) ? fileVersionNum : null,
+      version: isFileVersionValid(fileVersionNum) ? fileVersionNum : null,
       info: data.data,
       data: html,
     });
