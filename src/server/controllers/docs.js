@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 
-import { deriveHTMLDocKeyFromDocInfo } from "../utils.js";
+import { getHTMLDocByDocInfo } from "../utils.js";
 
 export function retrieveDocs(criteria, htmlDocs) {
   if (!Array.isArray(criteria) || criteria.length < 1) {
@@ -8,12 +8,7 @@ export function retrieveDocs(criteria, htmlDocs) {
   }
   const results = [];
   criteria.forEach(item => {
-    const docKey = deriveHTMLDocKeyFromDocInfo(item.key, item.lang, item.version);
-    if (!docKey) {
-      results.push(null);
-      return;
-    }
-    const doc = htmlDocs[docKey];
+    const doc = getHTMLDocByDocInfo(htmlDocs, item);
     if (!doc) {
       results.push(null);
       return;

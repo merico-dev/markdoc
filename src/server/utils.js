@@ -12,3 +12,11 @@ export function deriveHTMLDocKeyFromDocInfo(key, lang, version) {
   }
   return null;
 }
+
+export function getHTMLDocByDocInfo(htmlDocs, docInfo) {
+  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.key, docInfo.lang, docInfo.version);
+  if (!docKey) {
+    return null;
+  }
+  return htmlDocs[docKey] ?? null;
+}
