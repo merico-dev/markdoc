@@ -1,4 +1,6 @@
 import path from "path";
+import { fileURLToPath } from "url";
+import { keyBy } from "lodash-es";
 
 import { readFilePathListSync, isFileVersionValid, splitOnce } from "../misc.js";
 
@@ -8,7 +10,9 @@ import { purifyHtml } from "./purify.cjs";
 import { compileWithTemplate } from "./template.js";
 import { minifyHtml } from "./minify.js";
 
+const MARKDOWN_READ_PATH = "../../md";
 const MARKDOWN_EXTENSION = "md";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function readAllMarkdownDocs(readPath) {
   const pathList = readFilePathListSync(readPath, MARKDOWN_EXTENSION);
@@ -63,8 +67,24 @@ function parseMarkdownDocs(markdownDocs, options = {
   return htmlDocs;
 }
 
-export function readAndParseMarkdownDocs(readPath, options) {
+function readAndParseMarkdownDocs(readPath, options) {
   const markdownDocs = readAllMarkdownDocs(readPath);
   const htmlDocs = parseMarkdownDocs(markdownDocs, options);
   return htmlDocs;
+}
+
+export function getAllDocsForPublishing() {
+  return readAndParseMarkdownDocs(path.join(__dirname, MARKDOWN_READ_PATH), {
+    sanitize: true,
+    decorate: true,
+    minify: true,
+  });
+}
+
+export function getAllDocsForServing() {
+  const allDocs = readAndParseMarkdownDocs(path.join(__dirname, MARKDOWN_READ_PATH), {
+    sanitize: true,
+    minify: true,
+  });
+  return keyBy(allDocs, "relativePath");
 }

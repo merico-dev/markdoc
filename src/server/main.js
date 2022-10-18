@@ -3,7 +3,7 @@ import HapiPino from "hapi-pino";
 
 import { initRouters } from "./router.js";
 
-function initServer() {
+export function createServer() {
   const server = Server({
     host: process.env.SERVER_HOST || "localhost",
     port: process.env.SERVER_PORT || 3000,
@@ -34,15 +34,14 @@ async function registerPlugins(serverInstance) {
   });
 }
 
-async function startServer(serverInstance) {
-  await serverInstance.start();
-  console.log(`\nServer@${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
+async function setupServer(serverInstance, allDocs) {
+  decorateServer(serverInstance, allDocs);
+  await registerPlugins(serverInstance);
+  initRouters(serverInstance);
 }
 
-export async function serve(allDocs) {
-  const server = initServer();
-  decorateServer(server, allDocs);
-  await registerPlugins(server);
-  initRouters(server);
-  await startServer(server);
+export async function startServer(serverInstance, allDocs) {
+  await setupServer(serverInstance, allDocs);
+  await serverInstance.start();
+  console.log(`\nServer@${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
 }
