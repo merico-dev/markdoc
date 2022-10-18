@@ -34,14 +34,20 @@ async function registerPlugins(serverInstance) {
   });
 }
 
-async function setupServer(serverInstance, allDocs) {
+export async function startServer(serverInstance, allDocs) {
   decorateServer(serverInstance, allDocs);
   await registerPlugins(serverInstance);
   initRouters(serverInstance);
-}
 
-export async function startServer(serverInstance, allDocs) {
-  await setupServer(serverInstance, allDocs);
   await serverInstance.start();
   console.log(`\nServer@${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
+}
+
+// just for testing
+export async function initServer(serverInstance, allDocs) {
+  decorateServer(serverInstance, allDocs);
+  initRouters(serverInstance);
+
+  await serverInstance.initialize();
+  console.log(`\nServer@${process.env.npm_package_version} initialized at: ${serverInstance.info.uri}\n`);
 }

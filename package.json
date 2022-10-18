@@ -7,7 +7,7 @@
     "parse": "node ./src/parse.js",
     "serve": "node ./src/serve.js",
     "lint": "eslint ./src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lab --assert @hapi/code --leaks --verbose ./test/**/*.test.js"
   },
   "keywords": [
     "Merico",
