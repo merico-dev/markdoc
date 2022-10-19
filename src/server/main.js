@@ -3,10 +3,10 @@ import HapiPino from "hapi-pino";
 
 import { initRouters } from "./router.js";
 
-export function createServer() {
+export function createServer(host = "localhost", port = 3000) {
   const server = Server({
-    host: process.env.SERVER_HOST || "localhost",
-    port: process.env.SERVER_PORT || 3000,
+    host,
+    port,
     routes: {
       cors: true,
     },

@@ -5,7 +5,7 @@ import { createServer, startServer } from "./server/main.js";
 
 function run() {
   dotenv.config();
-  const server = createServer();
+  const server = createServer(process.env.SERVER_HOST, process.env.SERVER_PORT);
   const allDocs = getAllDocsForServing();
   startServer(server, allDocs);
 }
