@@ -31,10 +31,10 @@ suite("Testing Parser", () => {
   test("documents for serving should be loaded successfully and parsed correctly", () => {
     expect(docsForServing).to.be.an.object();
 
-    const doc = docsForServing["en/test@3.html"];
+    const doc = docsForServing["en/test.html"];
     expect(doc).to.exist();
-    expect(doc.version).to.equal(3);
-    expect(doc.info.title).to.equal("Manchester by the Sea V3");
+    expect(doc.version).to.be.null();
+    expect(doc.info.title).to.equal("Manchester by the Sea");
     expect(doc.info.release).to.be.a.string();
     expect(new Date(doc.info.release)).to.be.a.date();
     expect(doc.data).to.be.a.string().and.not.contain(["css"]);
