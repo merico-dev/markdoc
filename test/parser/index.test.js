@@ -1,29 +1,43 @@
 import { expect } from "@hapi/code";
 import * as Lab from "@hapi/lab";
 
-import { getAllDocsForPublishing } from "../../src/parser/main.js";
+import { getAllDocsForPublishing, getAllDocsForServing } from "../../src/parser/main.js";
 
 const lab = Lab.script();
 const { suite, test, before } = lab;
 
 suite("Testing Parser", () => {
-  let allDocs;
+  let docsForPublishing;
+  let docsForServing;
 
   before(() => {
-    allDocs = getAllDocsForPublishing();
+    docsForPublishing = getAllDocsForPublishing();
+    docsForServing = getAllDocsForServing();
   });
 
-  test("documents should be loaded successfully and parsed correctly", () => {
-    expect(allDocs).to.be.an.array();
-    expect(allDocs.length).to.be.at.least(1);
+  test("documents for publishing should be loaded successfully and parsed correctly", () => {
+    expect(docsForPublishing).to.be.an.array();
+    expect(docsForPublishing.length).to.be.at.least(1);
 
-    const doc = allDocs.find(item => item.relativePath === "en/test@3.html");
+    const doc = docsForPublishing.find(item => item.relativePath === "en/test@3.html");
     expect(doc).to.exist();
     expect(doc.version).to.equal(3);
     expect(doc.info.title).to.equal("Manchester by the Sea V3");
     expect(doc.info.release).to.be.a.string();
     expect(new Date(doc.info.release)).to.be.a.date();
-    expect(doc.data).to.be.a.string();
+    expect(doc.data).to.be.a.string().and.contain(["css"]);
+  });
+
+  test("documents for serving should be loaded successfully and parsed correctly", () => {
+    expect(docsForServing).to.be.an.object();
+
+    const doc = docsForServing["en/test@3.html"];
+    expect(doc).to.exist();
+    expect(doc.version).to.equal(3);
+    expect(doc.info.title).to.equal("Manchester by the Sea V3");
+    expect(doc.info.release).to.be.a.string();
+    expect(new Date(doc.info.release)).to.be.a.date();
+    expect(doc.data).to.be.a.string().and.not.contain(["css"]);
   });
 });
 
