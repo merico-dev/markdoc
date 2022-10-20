@@ -39,8 +39,8 @@ function parseMarkdownDocs(markdownDocs, options = {
   markdownDocs.forEach(item => {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
-    const splitNameInfo = splitOnce(name, "@");
-    const fileVersionNum = Number(splitNameInfo[1]);
+    const [, fileVersion] = splitOnce(name, "@");
+    const fileVersionNum = Number(fileVersion);
 
     // parse markdown
     let html = parseMarkdown(data.content);
