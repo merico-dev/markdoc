@@ -1,4 +1,4 @@
-name: GitHub Page
+name: GitHub Pages
 
 on:
   push:
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    name: Build
+    name: Deploy GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
