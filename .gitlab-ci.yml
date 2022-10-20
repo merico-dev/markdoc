@@ -14,6 +14,13 @@ cache:
 before_script:
   - npm ci --cache .npm --prefer-offline
 
+tests:
+  stage: test
+  script:
+    - echo 'Test started.'
+    - npm run test
+    - echo 'Test finished.'
+
 pages:
   stage: deploy
   script:

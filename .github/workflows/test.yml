@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+    branches: [ main, release ]
+  pull_request:
+    branches: [ main, release ]
+
+jobs:
+  build-and-test:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start
+        run: echo "→ Started"
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Prepare
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.19
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: Test
+        run: npm run test
+      - name: Completed
+        run: echo "→ Completed"
