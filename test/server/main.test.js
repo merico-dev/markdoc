@@ -23,7 +23,7 @@ describe("Testing Server", () => {
     await server.stop();
   });
 
-  it("GET / should respond with 200 and have the right result", async () => {
+  it("GET /", async () => {
     const res = await server.inject({
       method: "GET",
       url: "/"
@@ -32,7 +32,7 @@ describe("Testing Server", () => {
     expect(res.result).to.be.a.string();
   });
 
-  it("GET /api/v1/version should respond with 200 and have the right result", async () => {
+  it("GET /api/v1/version", async () => {
     const res = await server.inject({
       method: "GET",
       url: "/api/v1/version"
@@ -42,7 +42,7 @@ describe("Testing Server", () => {
     expect(res.result.packageVersion).to.be.a.string();
   });
 
-  it("POST /api/v1/docs should respond with 200 and have the right result", async () => {
+  it("POST /api/v1/docs", async () => {
     const res1 = await server.inject({
       method: "POST",
       url: "/api/v1/docs",

@@ -15,7 +15,7 @@ suite("Testing Parser", () => {
     docsForServing = getAllDocsForServing();
   });
 
-  test("documents for publishing should be loaded successfully and parsed correctly", () => {
+  test("getAllDocsForPublishing", () => {
     expect(docsForPublishing).to.be.an.array();
     expect(docsForPublishing.length).to.be.at.least(1);
 
@@ -29,7 +29,7 @@ suite("Testing Parser", () => {
     expect(doc.data).to.be.a.string().and.contain(["css"]);
   });
 
-  test("documents for serving should be loaded successfully and parsed correctly", () => {
+  test("getAllDocsForServing", () => {
     expect(docsForServing).to.be.an.object();
 
     const doc = docsForServing["en/test.html"];

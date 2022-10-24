@@ -1,13 +1,13 @@
 {
   "name": "ee-metric-help-doc",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "parse markdown to html",
   "exports": "./src/index.js",
   "scripts": {
     "parse": "node ./src/parse.js",
     "serve": "node ./src/serve.js",
     "lint": "eslint ./src/",
-    "test": "lab --assert @hapi/code --leaks --verbose ./test/**/*.test.js"
+    "test": "lab --assert @hapi/code --leaks --verbose ./test/*.test.js ./test/**/*.test.js"
   },
   "keywords": [
     "Merico",
