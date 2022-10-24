@@ -19,9 +19,12 @@
 
 基本上，我们的文档采用 Markdown 编写，然后在此基础上对 Markdown 的语法进行了一些扩展。关于文档的语法规范设计请见[初学者教程](./md/zh/tutorial.md)或者 [Tutorial for beginners](./md/en/tutorial.md)。
 
-编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。
+编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。我们约定，文档的目录结构为 `md/<lang>/<file>` 三级，`<lang>` 表示语言目录，`<file>` 表示 Markdown 文档。
 
-> 我们约定，文档的目录结构为 `md/<lang>/<file>` 三级。
+其中语言目录命名须遵循以下规则：
+
+- 目录名字符仅支持 `英文字母`/`-`
+- 目录名必须以小写英文字母打头
 
 Markdown 文档的命名须遵循以下规则：
 

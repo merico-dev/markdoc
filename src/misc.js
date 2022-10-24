@@ -3,12 +3,17 @@ import path from "path";
 
 export const DOC_ENCODING = "utf8";
 
+export function isUnixHiddenPath(filePath) {
+  return (/(^|\/)\.[^\/\.]/g).test(filePath);
+}
+
 export function readFilePathListSync(fromPath, extension) {
   const pathList = [];
 
   const traverseFilePath = (startPath) => {
     const direntList = fs.readdirSync(startPath, { withFileTypes: true });
-    direntList.forEach(item => {
+    const validDirentList = direntList.filter(item => !isUnixHiddenPath(item.name));
+    validDirentList.forEach(item => {
       const targetPath = path.join(startPath, item.name);
       if (item.isDirectory()) {
         traverseFilePath(targetPath);
