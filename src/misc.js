@@ -50,3 +50,22 @@ export function splitOnce(str, separator) {
   }
   return [str.slice(0, index), str.slice(index + 1)];
 }
+
+// 关于文件版本的定义规则请见「文档版本设计说明」
+export function deriveFileVersionFromFileName(fileName) {
+  if (typeof fileName !== "string") {
+    return null;
+  }
+  const [, fileVersionStr] = splitOnce(fileName, "@");
+  const fileVersion = Number(fileVersionStr);
+  return isFileVersionValid(fileVersion) ? fileVersion : null;
+}
+
+// 关于文件语言的定义规则请见「README」
+export function deriveFileLangFromFileDir(fileDir) {
+  if (typeof fileDir !== "string") {
+    return null;
+  }
+  const [lang] = fileDir.split(path.sep);
+  return lang ? lang : null;
+}

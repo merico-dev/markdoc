@@ -69,6 +69,7 @@ API 解释说明。
         "awards"
       ]
     },
+    "lang": "zh",
     "version": 3,
     "info": {
       "title": "海边的曼彻斯特",
@@ -86,6 +87,7 @@ API 解释说明。
 ```
 
 - `criterion` 表示请求信息。
-- `version` 表示文档版本。
+- `lang` 表示文档语言。
+- `version` 表示文档版本，如果文档没有版本，则返回 `null`。
 - `info` 表示文档信息，这部分数据来源于 Markdown 文档的 Front Matter 数据。
 - `data` 表示文档内容。

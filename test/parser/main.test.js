@@ -21,6 +21,7 @@ suite("Testing Parser", () => {
 
     const doc = docsForPublishing.find(item => item.relativePath === "en/test@3.html");
     expect(doc).to.exist();
+    expect(doc.lang).to.equal("en");
     expect(doc.version).to.equal(3);
     expect(doc.info.title).to.equal("Manchester by the Sea V3");
     expect(doc.info.release).to.be.a.string();
@@ -33,6 +34,7 @@ suite("Testing Parser", () => {
 
     const doc = docsForServing["en/test.html"];
     expect(doc).to.exist();
+    expect(doc.lang).to.equal("en");
     expect(doc.version).to.be.null();
     expect(doc.info.title).to.equal("Manchester by the Sea");
     expect(doc.info.release).to.be.a.string();

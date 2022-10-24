@@ -2,7 +2,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { keyBy } from "lodash-es";
 
-import { readFilePathListSync, isFileVersionValid, splitOnce } from "../misc.js";
+import {
+  readFilePathListSync,
+  deriveFileLangFromFileDir,
+  deriveFileVersionFromFileName,
+} from "../misc.js";
 
 import { readAndParseFrontMatter } from "./front-matter.js";
 import { parseMarkdown } from "./markup.js";
@@ -39,8 +43,8 @@ function parseMarkdownDocs(markdownDocs, options = {
   markdownDocs.forEach(item => {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
-    const [, fileVersion] = splitOnce(name, "@");
-    const fileVersionNum = Number(fileVersion);
+    const fileLang = deriveFileLangFromFileDir(dir);
+    const fileVersion = deriveFileVersionFromFileName(name);
 
     // parse markdown
     let html = parseMarkdown(data.content);
@@ -59,7 +63,8 @@ function parseMarkdownDocs(markdownDocs, options = {
 
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
-      version: isFileVersionValid(fileVersionNum) ? fileVersionNum : null,
+      lang: fileLang,
+      version: fileVersion,
       info: data.data,
       data: html,
     });
