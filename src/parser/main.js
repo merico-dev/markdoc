@@ -54,7 +54,10 @@ function parseMarkdownDocs(markdownDocs, options = {
     }
     // decorate html
     if (options?.decorate) {
-      html = compileWithTemplate(html, { ...data.data });
+      html = compileWithTemplate(html, data.data, {
+        lang: fileLang,
+        version: fileVersion,
+      });
     }
     // minify html
     if (options?.minify) {

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+{{#if lang}}
+  <html lang="{{lang}}">
+{{else}}
+  <html>
+{{/if}}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,11 +28,11 @@
   </style>
 </head>
 <body>
-  <div id="root" class="root-container">
+  {{#root}}
     <div id="md" class="markdown-body">
 {{> content}}
     </div>
-  </div>
+  {{/root}}
   <script type="module">
     import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/es/highlight.min.js';
     hljs.highlightAll();
