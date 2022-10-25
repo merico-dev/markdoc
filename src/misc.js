@@ -3,6 +3,13 @@ import path from "path";
 
 export const DOC_ENCODING = "utf8";
 
+export function doesStrConsistOfEngCharacters(str) {
+  if (typeof str !== "string") {
+    return false;
+  }
+  return (/^[a-zA-Z]+$/).test(str);
+}
+
 export function isUnixHiddenPath(filePath) {
   return (/(^|\/)\.[^\/\.]/g).test(filePath);
 }
