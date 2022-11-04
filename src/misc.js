@@ -3,11 +3,15 @@ import path from "path";
 
 export const DOC_ENCODING = "utf8";
 
-export function doesStrConsistOfEngCharacters(str) {
-  if (typeof str !== "string") {
+// 仅可由小写英文字符和横杠组成，且必须以小写英文字符开头和结尾，且不能以 xml 打头
+export function isDataAttrNamingIllegal(naming) {
+  if (typeof naming !== "string") {
     return false;
   }
-  return (/^[a-zA-Z]+$/).test(str);
+  if (naming.toLowerCase().startsWith("xml")) {
+    return false;
+  }
+  return (/^[a-z]([a-z]*\-?[a-z])*$/).test(naming);
 }
 
 export function isUnixHiddenPath(filePath) {
@@ -48,8 +52,17 @@ export function writeFiles(files) {
   });
 }
 
+// 合法的文件 version 必须为正整数（且小于 2^53）
 export function isFileVersionValid(version) {
   return Number.isSafeInteger(version) && version >= 1;
+}
+
+// 合法的文件 lang 仅可由英文字符和横杠组成，且必须以英文字符开头和结尾
+export function isFileLangValid(lang) {
+  if (typeof lang !== "string") {
+    return false;
+  }
+  return (/^[a-zA-Z]([a-zA-Z]*\-?[a-zA-Z])*$/).test(lang);
 }
 
 export function splitOnce(str, separator) {
@@ -79,5 +92,5 @@ export function deriveFileLangFromFileDir(fileDir) {
     return null;
   }
   const [lang] = fileDir.split(path.sep);
-  return lang ? lang : null;
+  return isFileLangValid(lang) ? lang : null;
 }

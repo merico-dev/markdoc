@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 
-import { DOC_ENCODING, doesStrConsistOfEngCharacters } from "../misc.js";
+import { DOC_ENCODING, isDataAttrNamingIllegal } from "../misc.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const markdownTemplate = fs.readFileSync(path.join(__dirname, "../../template/", "github-markdown-light.hbs"), DOC_ENCODING);
@@ -12,9 +12,9 @@ function createHandlebarsRootHelper(attrData) {
   function helper(options) {
     const attributes = Object.entries(attrData)
       .filter(([attrKey, attrValue]) => {
-        // 凡是属性名包含英文字符以外的数据一律过滤掉
-        // 凡是属性值为 undefined/null 的数据一律过滤掉
-        return doesStrConsistOfEngCharacters(attrKey) && attrValue !== undefined && attrValue !== null;
+        // 属性名不合法的一律过滤掉
+        // 属性值为 undefined/null 的一律过滤掉
+        return isDataAttrNamingIllegal(attrKey) && attrValue !== undefined && attrValue !== null;
       })
       .map(([attrKey, attrValue]) => `data-${attrKey}="${Handlebars.escapeExpression(attrValue)}"`)
       .join(" ");

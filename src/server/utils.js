@@ -1,6 +1,9 @@
 import { isFileVersionValid } from "../misc.js";
 
 export function deriveHTMLDocKeyFromDocInfo(key, lang, version) {
+  if (!key || !lang) {
+    return null;
+  }
   let docKey = `${lang}/${key}`;
   if (version === undefined || version === null) {
     docKey += ".html";
