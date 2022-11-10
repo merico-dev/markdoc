@@ -3,8 +3,9 @@ import path from "path";
 
 export const DOC_ENCODING = "utf8";
 
-// 仅可由小写英文字符和横杠组成，且必须以小写英文字符开头和结尾，且不能以 xml 打头
-export function isDataAttrNamingIllegal(naming) {
+// HTML Data Attributes 仅可由小写英文字符和连字符组成
+// 且必须以小写英文字符开头和结尾，且多个连字符不能相连，且不能以 xml 打头
+export function isDataAttrNamingValid(naming) {
   if (typeof naming !== "string") {
     return false;
   }
@@ -12,6 +13,19 @@ export function isDataAttrNamingIllegal(naming) {
     return false;
   }
   return (/^[a-z]([a-z]*\-?[a-z])*$/).test(naming);
+}
+
+// 合法的文件 version 必须为正整数（且小于 2^53）
+export function isFileVersionValid(version) {
+  return Number.isSafeInteger(version) && version >= 1;
+}
+
+// 合法的目录名仅可由英文字符、连字符、下划线组成，且必须以英文字符开头和结尾
+export function isFileDirValid(dir) {
+  if (typeof dir !== "string") {
+    return false;
+  }
+  return (/^[a-zA-Z]([a-zA-Z]*-*_*[a-zA-Z])*$/).test(dir);
 }
 
 export function isUnixHiddenPath(filePath) {
@@ -52,19 +66,6 @@ export function writeFiles(files) {
   });
 }
 
-// 合法的文件 version 必须为正整数（且小于 2^53）
-export function isFileVersionValid(version) {
-  return Number.isSafeInteger(version) && version >= 1;
-}
-
-// 合法的文件 lang 仅可由英文字符和横杠组成，且必须以英文字符开头和结尾
-export function isFileLangValid(lang) {
-  if (typeof lang !== "string") {
-    return false;
-  }
-  return (/^[a-zA-Z]([a-zA-Z]*\-?[a-zA-Z])*$/).test(lang);
-}
-
 export function splitOnce(str, separator) {
   if (typeof str !== "string" || typeof separator !== "string" || !separator) {
     return [str];
@@ -92,5 +93,5 @@ export function deriveFileLangFromFileDir(fileDir) {
     return null;
   }
   const [lang] = fileDir.split(path.sep);
-  return isFileLangValid(lang) ? lang : null;
+  return isFileDirValid(lang) ? lang : null;
 }
