@@ -5,7 +5,7 @@
   "created_at": "2022-08-05",
   "authors": ["dingding.zhang@merico.dev"],
   "tags": ["代码当量", "累积"],
-  "about": "https://github.com/merico-dev/ee-metric-help-doc/blob/main/md/zh/sample.md"
+  "about": "https://github.com/merico-dev/markdoc/blob/main/md/zh/sample.md"
 }
 ---
 # 累积代码当量

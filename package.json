@@ -1,5 +1,5 @@
 {
-  "name": "ee-metric-help-doc",
+  "name": "markdoc",
   "version": "1.4.3",
   "description": "parse markdown to html",
   "exports": "./src/index.js",
