@@ -15,9 +15,9 @@ export function isDataAttrNamingValid(naming) {
   return (/^[a-z]([a-z]*\-?[a-z])*$/).test(naming);
 }
 
-// 合法的文件 version 必须为正整数（且小于 2^53）
-export function isFileVersionValid(version) {
-  return Number.isSafeInteger(version) && version >= 1;
+// 合法的文件 edtion 必须为正整数（且小于 2^53）
+export function isFileEdtionValid(edtion) {
+  return Number.isSafeInteger(edtion) && edtion >= 1;
 }
 
 // 合法的目录名仅可由英文字符、连字符、下划线组成，且必须以英文字符开头和结尾
@@ -78,13 +78,13 @@ export function splitOnce(str, separator) {
 }
 
 // 关于文件版本的定义规则请见「文档版本设计说明」
-export function deriveFileVersionFromFileName(fileName) {
+export function deriveFileEdtionFromFileName(fileName) {
   if (typeof fileName !== "string") {
     return null;
   }
-  const [, fileVersionStr] = splitOnce(fileName, "@");
-  const fileVersion = Number(fileVersionStr);
-  return isFileVersionValid(fileVersion) ? fileVersion : null;
+  const [, fileEdtionStr] = splitOnce(fileName, "@");
+  const fileEdtion = Number(fileEdtionStr);
+  return isFileEdtionValid(fileEdtion) ? fileEdtion : null;
 }
 
 // 关于文件语言的定义规则请见「README」

@@ -16,7 +16,7 @@ export function retrieveDocs(criteria, htmlDocs) {
     const result = {
       criterion: item,
       lang: doc.lang,
-      version: doc.version,
+      edtion: doc.edtion,
       info: doc.info,
       data: [],
     };

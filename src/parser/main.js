@@ -5,7 +5,7 @@ import { keyBy } from "lodash-es";
 import {
   readFilePathListSync,
   deriveFileLangFromFileDir,
-  deriveFileVersionFromFileName,
+  deriveFileEdtionFromFileName,
 } from "../misc.js";
 
 import { readAndParseFrontMatter } from "./front-matter.js";
@@ -44,7 +44,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
     const fileLang = deriveFileLangFromFileDir(dir);
-    const fileVersion = deriveFileVersionFromFileName(name);
+    const fileEdtion = deriveFileEdtionFromFileName(name);
 
     // parse markdown
     let html = parseMarkdown(data.content);
@@ -56,7 +56,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     if (options?.decorate) {
       html = compileWithTemplate(html, data.data, {
         lang: fileLang,
-        version: fileVersion,
+        edtion: fileEdtion,
       });
     }
     // minify html
@@ -67,7 +67,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
       lang: fileLang,
-      version: fileVersion,
+      edtion: fileEdtion,
       info: data.data,
       data: html,
     });

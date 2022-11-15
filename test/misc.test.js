@@ -4,7 +4,7 @@ import * as Lab from "@hapi/lab";
 
 import {
   splitOnce,
-  deriveFileVersionFromFileName,
+  deriveFileEdtionFromFileName,
   deriveFileLangFromFileDir,
 } from "../src/misc.js";
 
@@ -49,37 +49,37 @@ suite("Testing Misc", () => {
     expect(result[1]).to.equal("3@4.md");
   });
 
-  test("deriveFileVersionFromFileName", () => {
+  test("deriveFileEdtionFromFileName", () => {
     let { name: emptyName2 } = path.parse(emptyPath2);
-    let result = deriveFileVersionFromFileName(emptyName2);
+    let result = deriveFileEdtionFromFileName(emptyName2);
     expect(result).to.be.null();
 
     let { name: emptyName3 } = path.parse(emptyPath3);
-    result = deriveFileVersionFromFileName(emptyName3);
+    result = deriveFileEdtionFromFileName(emptyName3);
     expect(result).to.be.null();
 
     let { name: emptyName4 } = path.parse(emptyPath4);
-    result = deriveFileVersionFromFileName(emptyName4);
+    result = deriveFileEdtionFromFileName(emptyName4);
     expect(result).to.be.null();
 
     let { name: fullName2 } = path.parse(fullPath2);
-    result = deriveFileVersionFromFileName(fullName2);
+    result = deriveFileEdtionFromFileName(fullName2);
     expect(result).to.be.null();
 
     let { name: fullName3 } = path.parse(fullPath3);
-    result = deriveFileVersionFromFileName(fullName3);
+    result = deriveFileEdtionFromFileName(fullName3);
     expect(result).to.equal(3);
 
     let { name: fullName4 } = path.parse(fullPath4);
-    result = deriveFileVersionFromFileName(fullName4);
+    result = deriveFileEdtionFromFileName(fullName4);
     expect(result).to.be.null();
 
     let { name: fullName5 } = path.parse(fullPath5);
-    result = deriveFileVersionFromFileName(fullName5);
+    result = deriveFileEdtionFromFileName(fullName5);
     expect(result).to.be.null();
 
     let { name: fullName7 } = path.parse(fullPath7);
-    result = deriveFileVersionFromFileName(fullName7);
+    result = deriveFileEdtionFromFileName(fullName7);
     expect(result).to.equal(3);
   });
 

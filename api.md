@@ -43,7 +43,7 @@ API 解释说明。
   {
     "key": "test",
     "lang": "zh",
-    "version": 3,
+    "edtion": 3,
     "sections": [
       "awards"
     ]
@@ -53,7 +53,7 @@ API 解释说明。
 
 - `key` 表示要获取的文档的唯一标识符，这个 `key` 要和文档的文件名一致。
 - `lang` 表示要获取的文档的语言，目前支持 `zh`/`en` 两种。
-- `version` 可选参数，表示要获取的文档的版本，如果传入了 `version`，则 `version` 必须为正整数（且小于 2^53）。
+- `edtion` 可选参数，表示要获取的文档的版本，如果传入了 `edtion`，则 `edtion` 必须为正整数（且小于 2^53）。
 - `sections` 可选参数，表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
 
 **返回值**
@@ -64,13 +64,13 @@ API 解释说明。
     "criterion": {
       "key": "test",
       "lang": "zh",
-      "version": 3,
+      "edtion": 3,
       "sections": [
         "awards"
       ]
     },
     "lang": "zh",
-    "version": 3,
+    "edtion": 3,
     "info": {
       "title": "海边的曼彻斯特",
       "desc": "影片讲述了李·钱德勒的哥哥因病去世之后，他作为监护人照顾侄子的故事",
@@ -88,6 +88,6 @@ API 解释说明。
 
 - `criterion` 表示请求信息。
 - `lang` 表示文档语言。
-- `version` 表示文档版本，如果文档没有版本，则返回 `null`。
+- `edtion` 表示文档版本，如果文档没有版本，则返回 `null`。
 - `info` 表示文档信息，这部分数据来源于 Markdown 文档的 Front Matter 数据。
 - `data` 表示文档内容。

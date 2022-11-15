@@ -1,23 +1,23 @@
-import { isFileVersionValid } from "../misc.js";
+import { isFileEdtionValid } from "../misc.js";
 
-export function deriveHTMLDocKeyFromDocInfo(key, lang, version) {
+export function deriveHTMLDocKeyFromDocInfo(key, lang, edtion) {
   if (!key || !lang) {
     return null;
   }
   let docKey = `${lang}/${key}`;
-  if (version === undefined || version === null) {
+  if (edtion === undefined || edtion === null) {
     docKey += ".html";
     return docKey;
   }
-  if (isFileVersionValid(version)) {
-    docKey += `@${version}.html`;
+  if (isFileEdtionValid(edtion)) {
+    docKey += `@${edtion}.html`;
     return docKey;
   }
   return null;
 }
 
 export function getHTMLDocByDocInfo(htmlDocs, docInfo) {
-  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.key, docInfo.lang, docInfo.version);
+  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.key, docInfo.lang, docInfo.edtion);
   if (!docKey) {
     return null;
   }

@@ -72,7 +72,7 @@ describe("Testing Server", () => {
       payload: [{
         "key": "test",
         "lang": "en",
-        "version": 2
+        "edtion": 2
       }]
     });
     expect(res3.statusCode).to.equal(200);
@@ -85,7 +85,7 @@ describe("Testing Server", () => {
       payload: [{
         "key": "test",
         "lang": "en",
-        "version": "3"
+        "edtion": "3"
       }]
     });
     expect(res4.statusCode).to.equal(200);
@@ -98,12 +98,12 @@ describe("Testing Server", () => {
       payload: [{
         "key": "test",
         "lang": "en",
-        "version": 3
+        "edtion": 3
       }]
     });
     expect(res5.statusCode).to.equal(200);
     expect(res5.result).to.be.an.array().and.to.have.length(1);
-    expect(res5.result[0].version).to.equal(3);
+    expect(res5.result[0].edtion).to.equal(3);
 
     const res6 = await server.inject({
       method: "POST",
@@ -134,7 +134,7 @@ describe("Testing Server", () => {
     });
     expect(res7.statusCode).to.equal(200);
     expect(res7.result).to.be.an.array().and.to.have.length(1);
-    expect(res7.result[0].version).to.be.null();
+    expect(res7.result[0].edtion).to.be.null();
     expect(res7.result[0].data).to.be.an.array().and.to.have.length(1);
     expect(res7.result[0].data[0]).to.exist();
 
