@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import { writeFiles } from "./misc.js";
 import { getAllDocsForPublishing } from "./parser/main.js";
 
-const HTML_WRITE_PATH = "../public/docs";
+const HTML_WRITE_PATH = "../public/html";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function cleanTargetDir(targetPath) {

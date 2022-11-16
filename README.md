@@ -19,7 +19,7 @@
 
 基本上，我们的文档采用 Markdown 编写，然后在此基础上对 Markdown 的语法进行了一些扩展。关于文档的语法规范设计请见[初学者教程](./md/zh/tutorial.md)或者 [Tutorial for beginners](./md/en/tutorial.md)。
 
-编写好 Markdown 文档后，根据不同的语言，将文档放置在 `md/zh/` 或 `md/en/` 目录下即可。我们约定，文档的目录结构为 `md/<lang>/<file>` 三级，`<lang>` 表示语言目录，`<file>` 表示 Markdown 文档。
+编写好 Markdown 文档后，根据不同的语言，将文档放置在仓库的 `md/zh/` 或 `md/en/` 目录下即可。我们约定，文档的目录结构为 `md/<lang>/<file>` 三级，其中 `md` 表示 Markdown 文档库目录，`<lang>` 表示语言目录，`<file>` 表示 Markdown 文档。
 
 其中目录命名须遵循以下规范：
 
@@ -42,11 +42,11 @@ Markdown 文档的命名须遵循以下规范：
 npm run parse
 ```
 
-该命令会在 `public/docs/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。
+该命令会在 `public/html/` 下生成对应的 HTML 文档，使用浏览器打开 HTML 文档即可预览。
 
 ### 如何启动一个 HTTP Server 来提供文档？
 
-你也可以启动一个 Server 来通过 HTTP 协议向外提供文档，该 Server 会直接读取 Markdown 文档，然后按照指定参数返回文档信息和编译好的 HTML 内容（或内容片段）。
+你也可以启动一个 Server 来通过 HTTP 协议向外提供文档，该 Server 会直接读取相关 Markdown 文档，然后按照指定参数返回文档信息和编译好的 HTML 内容（或内容片段）。
 
 首先在根目录创建一个 `.env` 的环境变量配置：
 
@@ -55,7 +55,7 @@ SERVER_HOST="localhost"
 SERVER_PORT=3000
 ```
 
-> `SERVER_HOST` 和 `SERVER_PORT` 请根据你自己的实际情况来配置。当然，直接使用命令行来传入环境变量也是可以的。如果你没有配置环境变量，服务器会默认使用 `localhost:3000` 来启动。
+> 环境变量请根据你自己的实际情况来配置。当然，直接使用命令行来传入环境变量而不是配置 `.env` 也是可以的。如果你没有配置相关环境变量，服务器默认会在 `localhost:3000` 启动。
 
 然后运行如下命令：
 
