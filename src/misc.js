@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
+import yaml from "yaml";
 
-export const DOC_ENCODING = "utf8";
+export const FILE_ENCODING = "utf8";
 
 // HTML Data Attributes 仅可由小写英文字符和连字符组成
 // 且必须以小写英文字符开头和结尾，且多个连字符不能相连，且不能以 xml 打头
@@ -30,6 +31,17 @@ export function isFileDirValid(dir) {
 
 export function isUnixHiddenPath(filePath) {
   return (/(^|\/)\.[^\/\.]/g).test(filePath);
+}
+
+export function readYamlFile(filePath) {
+  let data = null;
+  try {
+    const file = fs.readFileSync(filePath, FILE_ENCODING);
+    data = yaml.parse(file);
+  } catch (err) {
+    console.error(err);
+  }
+  return data;
 }
 
 export function readFilePathListSync(fromPath, extension) {
@@ -62,7 +74,7 @@ export function writeFiles(files) {
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
     }
-    fs.writeFileSync(item.path, item.data, DOC_ENCODING);
+    fs.writeFileSync(item.path, item.data, FILE_ENCODING);
   });
 }
 
@@ -87,11 +99,14 @@ export function deriveFileEdtionFromFileName(fileName) {
   return isFileEdtionValid(fileEdtion) ? fileEdtion : null;
 }
 
-// 关于文件语言的定义规则请见「README」
-export function deriveFileLangFromFileDir(fileDir) {
+// 关于文件目录的定义规则请见「README」
+export function deriveFileSourceAndLangFromFileDir(fileDir) {
   if (typeof fileDir !== "string") {
     return null;
   }
-  const [lang] = fileDir.split(path.sep);
-  return isFileDirValid(lang) ? lang : null;
+  const [source, lang] = fileDir.split(path.sep);
+  return [
+    isFileDirValid(source) ? source : null,
+    isFileDirValid(lang) ? lang : null,
+  ];
 }

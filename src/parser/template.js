@@ -3,10 +3,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 
-import { DOC_ENCODING, isDataAttrNamingValid } from "../misc.js";
+import { FILE_ENCODING, isDataAttrNamingValid } from "../misc.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const markdownTemplate = fs.readFileSync(path.join(__dirname, "../../template/", "github-markdown-light.hbs"), DOC_ENCODING);
+const markdownTemplate = fs.readFileSync(path.join(__dirname, "../../template/", "github-markdown-light.hbs"), FILE_ENCODING);
 
 function createHandlebarsRootHelper(attrData) {
   function helper(options) {

@@ -5,6 +5,8 @@
 ```sh
 # 构建（可读）版本号
 BUILD_VERSION="test"
+# 文档源清单文件的路径
+MARKDOWN_MANIFEST="manifest.yaml"
 # 服务器主机地址
 SERVER_HOST="localhost"
 # 服务器端口号

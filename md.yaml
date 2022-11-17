@@ -1,0 +1,6 @@
+# 必选，文档库的唯一标识，命名规则遵循 README 中 Markdown 文档目录的命名规则
+key: "tutorial"
+# 可选，表示文档库名称
+name: "Tutorial"
+# 可选，表示文档库版本
+version: "1.2.3"

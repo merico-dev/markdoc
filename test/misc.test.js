@@ -5,7 +5,7 @@ import * as Lab from "@hapi/lab";
 import {
   splitOnce,
   deriveFileEdtionFromFileName,
-  deriveFileLangFromFileDir,
+  deriveFileSourceAndLangFromFileDir,
 } from "../src/misc.js";
 
 const lab = Lab.script();
@@ -83,37 +83,37 @@ suite("Testing Misc", () => {
     expect(result).to.equal(3);
   });
 
-  test("deriveFileLangFromFileDir", () => {
+  test("deriveFileSourceAndLangFromFileDir", () => {
     let { dir: emptyDir2 } = path.parse(emptyPath2);
-    let result = deriveFileLangFromFileDir(emptyDir2);
+    let result = deriveFileSourceAndLangFromFileDir(emptyDir2);
     expect(result).to.be.null();
 
     let { dir: emptyDir3 } = path.parse(emptyPath3);
-    result = deriveFileLangFromFileDir(emptyDir3);
+    result = deriveFileSourceAndLangFromFileDir(emptyDir3);
     expect(result).to.be.null();
 
     let { dir: emptyDir4 } = path.parse(emptyPath4);
-    result = deriveFileLangFromFileDir(emptyDir4);
+    result = deriveFileSourceAndLangFromFileDir(emptyDir4);
     expect(result).to.equal("zh");
 
     let { dir: fullDir1 } = path.parse(fullPath1);
-    result = deriveFileLangFromFileDir(fullDir1);
+    result = deriveFileSourceAndLangFromFileDir(fullDir1);
     expect(result).to.be.null();
 
     let { dir: fullDir2 } = path.parse(fullPath2);
-    result = deriveFileLangFromFileDir(fullDir2);
+    result = deriveFileSourceAndLangFromFileDir(fullDir2);
     expect(result).to.equal("zh");
 
     let { dir: fullDir4 } = path.parse(fullPath4);
-    result = deriveFileLangFromFileDir(fullDir4);
+    result = deriveFileSourceAndLangFromFileDir(fullDir4);
     expect(result).to.equal("zh");
 
     let { dir: fullDir5 } = path.parse(fullPath5);
-    result = deriveFileLangFromFileDir(fullDir5);
+    result = deriveFileSourceAndLangFromFileDir(fullDir5);
     expect(result).to.equal("zh");
 
     let { dir: fullDir6 } = path.parse(fullPath6);
-    result = deriveFileLangFromFileDir(fullDir6);
+    result = deriveFileSourceAndLangFromFileDir(fullDir6);
     expect(result).to.equal("zh");
   });
 });

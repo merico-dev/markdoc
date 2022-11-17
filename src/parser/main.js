@@ -3,8 +3,9 @@ import { fileURLToPath } from "url";
 import { keyBy } from "lodash-es";
 
 import {
+  readYamlFile,
   readFilePathListSync,
-  deriveFileLangFromFileDir,
+  deriveFileSourceAndLangFromFileDir,
   deriveFileEdtionFromFileName,
 } from "../misc.js";
 
@@ -14,20 +15,42 @@ import { purifyHtml } from "./purify.cjs";
 import { compileWithTemplate } from "./template.js";
 import { minifyHtml } from "./minify.js";
 
-const MARKDOWN_READ_PATH = "../../md";
+const MARKDOWN_SOURCE_INFO_FILE = "md.yaml";
+const MARKDOWN_SOURCE_LIB_DIR = "md/";
 const MARKDOWN_EXTENSION = "md";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-function readAllMarkdownDocs(readPath) {
-  const pathList = readFilePathListSync(readPath, MARKDOWN_EXTENSION);
+function getManifestFilePath() {
+  const manifestPath = process.env.MARKDOWN_MANIFEST;
+  if (!manifestPath) {
+    return null;
+  }
+  return path.resolve(__dirname, "../../", manifestPath);
+}
+
+function readAllMarkdownDocs(manifestFilePath, markdownManifest) {
   const docs = [];
-  pathList.forEach(item => {
+  const { dir: manifestFileDir } = path.parse(manifestFilePath);
+  markdownManifest.forEach(item => {
     try {
-      docs.push({
-        relativePath: path.relative(readPath, item),
-        data: readAndParseFrontMatter(item),
+      const markdownSourcePath = path.resolve(manifestFileDir, item.path);
+      const markdownSourceInfo = readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
+      if (!markdownSourceInfo?.key) {
+        return;
+      }
+      const libPath = path.join(markdownSourcePath, MARKDOWN_SOURCE_LIB_DIR);
+      const filePathList = readFilePathListSync(libPath, MARKDOWN_EXTENSION);
+      filePathList.forEach(filePath => {
+        try {
+          docs.push({
+            relativePath: path.join(markdownSourceInfo.key, path.relative(libPath, filePath)),
+            data: readAndParseFrontMatter(filePath),
+          });
+        } catch (err) {
+          console.error(err);
+        }
       });
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   });
@@ -43,7 +66,7 @@ function parseMarkdownDocs(markdownDocs, options = {
   markdownDocs.forEach(item => {
     const { relativePath, data } = item;
     const { dir, name } = path.parse(relativePath);
-    const fileLang = deriveFileLangFromFileDir(dir);
+    const [fileSource, fileLang] = deriveFileSourceAndLangFromFileDir(dir);
     const fileEdtion = deriveFileEdtionFromFileName(name);
 
     // parse markdown
@@ -55,6 +78,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     // decorate html
     if (options?.decorate) {
       html = compileWithTemplate(html, data.data, {
+        source: fileSource,
         lang: fileLang,
         edtion: fileEdtion,
       });
@@ -66,6 +90,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
+      source: fileSource,
       lang: fileLang,
       edtion: fileEdtion,
       info: data.data,
@@ -75,14 +100,22 @@ function parseMarkdownDocs(markdownDocs, options = {
   return htmlDocs;
 }
 
-function readAndParseMarkdownDocs(readPath, options) {
-  const markdownDocs = readAllMarkdownDocs(readPath);
+function readAndParseMarkdownDocs(options) {
+  const manifestFilePath = getManifestFilePath();
+  if (!manifestFilePath) {
+    return [];
+  }
+  const manifest = readYamlFile(manifestFilePath);
+  if (!Array.isArray(manifest) || manifest.length < 1) {
+    return [];
+  }
+  const markdownDocs = readAllMarkdownDocs(manifestFilePath, manifest);
   const htmlDocs = parseMarkdownDocs(markdownDocs, options);
   return htmlDocs;
 }
 
 export function getAllDocsForPublishing() {
-  return readAndParseMarkdownDocs(path.join(__dirname, MARKDOWN_READ_PATH), {
+  return readAndParseMarkdownDocs({
     sanitize: true,
     decorate: true,
     minify: true,
@@ -90,7 +123,7 @@ export function getAllDocsForPublishing() {
 }
 
 export function getAllDocsForServing() {
-  const allDocs = readAndParseMarkdownDocs(path.join(__dirname, MARKDOWN_READ_PATH), {
+  const allDocs = readAndParseMarkdownDocs({
     sanitize: true,
     minify: true,
   });
