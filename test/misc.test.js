@@ -16,14 +16,17 @@ suite("Testing Misc", () => {
   const emptyPath2 = "";
   const emptyPath3 = "zh/";
   const emptyPath4 = "zh/.md";
+  const emptyPath5 = "tutorial/zh/";
+  const emptyPath6 = "tutorial/zh/.md";
 
   const fullPath1 = "test.md";
-  const fullPath2 = "zh/test.md";
-  const fullPath3 = "zh/test@3.md";
-  const fullPath4 = "zh/test@3@4.md";
-  const fullPath5 = "zh/test@3.14.md";
-  const fullPath6 = "zh/cn/test.md";
-  const fullPath7 = "zh/cn@2/test@3.md";
+  const fullPath2 = "tutorial/zh/test.md";
+  const fullPath3 = "tutorial/zh/test@3.md";
+  const fullPath4 = "tutorial/zh/test@3@4.md";
+  const fullPath5 = "tutorial/zh/test@3.14.md";
+  const fullPath6 = "tutorial/zh/cn/test.md";
+  const fullPath7 = "tutorial/zh/cn@2/test@3.md";
+  const fullPath8 = "tutorial/test.md";
 
   test("splitOnce", () => {
     let result = splitOnce(emptyPath1, "@");
@@ -40,12 +43,12 @@ suite("Testing Misc", () => {
 
     result = splitOnce(fullPath3, "@");
     expect(result).to.be.an.array().and.to.have.length(2);
-    expect(result[0]).to.equal("zh/test");
+    expect(result[0]).to.equal("tutorial/zh/test");
     expect(result[1]).to.equal("3.md");
 
     result = splitOnce(fullPath4, "@");
     expect(result).to.be.an.array().and.to.have.length(2);
-    expect(result[0]).to.equal("zh/test");
+    expect(result[0]).to.equal("tutorial/zh/test");
     expect(result[1]).to.equal("3@4.md");
   });
 
@@ -60,6 +63,10 @@ suite("Testing Misc", () => {
 
     let { name: emptyName4 } = path.parse(emptyPath4);
     result = deriveFileEdtionFromFileName(emptyName4);
+    expect(result).to.be.null();
+
+    let { name: emptyName5 } = path.parse(emptyPath5);
+    result = deriveFileEdtionFromFileName(emptyName5);
     expect(result).to.be.null();
 
     let { name: fullName2 } = path.parse(fullPath2);
@@ -81,40 +88,78 @@ suite("Testing Misc", () => {
     let { name: fullName7 } = path.parse(fullPath7);
     result = deriveFileEdtionFromFileName(fullName7);
     expect(result).to.equal(3);
+
+    let { name: fullName8 } = path.parse(fullPath8);
+    result = deriveFileEdtionFromFileName(fullName8);
+    expect(result).to.be.null();
   });
 
   test("deriveFileSourceAndLangFromFileDir", () => {
     let { dir: emptyDir2 } = path.parse(emptyPath2);
     let result = deriveFileSourceAndLangFromFileDir(emptyDir2);
-    expect(result).to.be.null();
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.be.null();
+    expect(result[1]).to.be.null();
 
     let { dir: emptyDir3 } = path.parse(emptyPath3);
     result = deriveFileSourceAndLangFromFileDir(emptyDir3);
-    expect(result).to.be.null();
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.be.null();
+    expect(result[1]).to.be.null();
 
     let { dir: emptyDir4 } = path.parse(emptyPath4);
     result = deriveFileSourceAndLangFromFileDir(emptyDir4);
-    expect(result).to.equal("zh");
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("zh");
+    expect(result[1]).to.be.null();
+
+    let { dir: emptyDir5 } = path.parse(emptyPath5);
+    result = deriveFileSourceAndLangFromFileDir(emptyDir5);
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.be.null();
+
+    let { dir: emptyDir6 } = path.parse(emptyPath6);
+    result = deriveFileSourceAndLangFromFileDir(emptyDir6);
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.equal("zh");
 
     let { dir: fullDir1 } = path.parse(fullPath1);
     result = deriveFileSourceAndLangFromFileDir(fullDir1);
-    expect(result).to.be.null();
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.be.null();
+    expect(result[1]).to.be.null();
 
     let { dir: fullDir2 } = path.parse(fullPath2);
     result = deriveFileSourceAndLangFromFileDir(fullDir2);
-    expect(result).to.equal("zh");
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.equal("zh");
 
     let { dir: fullDir4 } = path.parse(fullPath4);
     result = deriveFileSourceAndLangFromFileDir(fullDir4);
-    expect(result).to.equal("zh");
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.equal("zh");
 
     let { dir: fullDir5 } = path.parse(fullPath5);
     result = deriveFileSourceAndLangFromFileDir(fullDir5);
-    expect(result).to.equal("zh");
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.equal("zh");
 
     let { dir: fullDir6 } = path.parse(fullPath6);
     result = deriveFileSourceAndLangFromFileDir(fullDir6);
-    expect(result).to.equal("zh");
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.equal("zh");
+
+    let { dir: fullDir8 } = path.parse(fullPath8);
+    result = deriveFileSourceAndLangFromFileDir(fullDir8);
+    expect(result).to.be.an.array().and.to.have.length(2);
+    expect(result[0]).to.equal("tutorial");
+    expect(result[1]).to.be.null();
   });
 });
 
