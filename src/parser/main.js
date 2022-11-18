@@ -1,10 +1,14 @@
 import path from "path";
-import { fileURLToPath } from "url";
 import { keyBy } from "lodash-es";
 
 import {
+  MARKDOWN_SOURCE_INFO_FILE,
+  MARKDOWN_SOURCE_LIB_DIR,
+  MARKDOWN_EXTENSION,
   readYamlFile,
   readFilePathListSync,
+  getMarkdownManifest,
+  isFileDirValid,
   deriveFileSourceAndLangFromFileDir,
   deriveFileEdtionFromFileName,
 } from "../misc.js";
@@ -15,41 +19,40 @@ import { purifyHtml } from "./purify.cjs";
 import { compileWithTemplate } from "./template.js";
 import { minifyHtml } from "./minify.js";
 
-const MARKDOWN_SOURCE_INFO_FILE = "md.yaml";
-const MARKDOWN_SOURCE_LIB_DIR = "md/";
-const MARKDOWN_EXTENSION = "md";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-function getManifestFilePath() {
-  const manifestPath = process.env.MARKDOWN_MANIFEST;
-  if (!manifestPath) {
-    return null;
-  }
-  return path.resolve(__dirname, "../../", manifestPath);
+function readMarkdownSourceDocs(sourceDocsPath, sourceKey, sourceHash) {
+  const docs = [];
+  const filePathList = readFilePathListSync(sourceDocsPath, MARKDOWN_EXTENSION);
+  filePathList.forEach(item => {
+    try {
+      docs.push({
+        relativePath: path.join(sourceKey, path.relative(sourceDocsPath, item)),
+        sourceHash: sourceHash ?? null,
+        data: readAndParseFrontMatter(item),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+  return docs;
 }
 
 function readAllMarkdownDocs(manifestFilePath, markdownManifest) {
-  const docs = [];
+  if (!manifestFilePath || !Array.isArray(markdownManifest) || markdownManifest.length < 1) {
+    return [];
+  }
+
+  let docs = [];
   const { dir: manifestFileDir } = path.parse(manifestFilePath);
   markdownManifest.forEach(item => {
     try {
       const markdownSourcePath = path.resolve(manifestFileDir, item.path);
       const markdownSourceInfo = readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
-      if (!markdownSourceInfo?.key) {
+      if (!isFileDirValid(markdownSourceInfo?.key)) {
         return;
       }
       const libPath = path.join(markdownSourcePath, MARKDOWN_SOURCE_LIB_DIR);
-      const filePathList = readFilePathListSync(libPath, MARKDOWN_EXTENSION);
-      filePathList.forEach(filePath => {
-        try {
-          docs.push({
-            relativePath: path.join(markdownSourceInfo.key, path.relative(libPath, filePath)),
-            data: readAndParseFrontMatter(filePath),
-          });
-        } catch (err) {
-          console.error(err);
-        }
-      });
+      const sourceDocs = readMarkdownSourceDocs(libPath, markdownSourceInfo.key, item.hash);
+      docs = docs.concat(sourceDocs);
     } catch (err) {
       console.error(err);
     }
@@ -64,7 +67,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 }) {
   const htmlDocs = [];
   markdownDocs.forEach(item => {
-    const { relativePath, data } = item;
+    const { relativePath, sourceHash, data } = item;
     const { dir, name } = path.parse(relativePath);
     const [fileSource, fileLang] = deriveFileSourceAndLangFromFileDir(dir);
     const fileEdtion = deriveFileEdtionFromFileName(name);
@@ -90,6 +93,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 
     htmlDocs.push({
       relativePath: `${dir}/${name}.html`,
+      sourceHash,
       source: fileSource,
       lang: fileLang,
       edtion: fileEdtion,
@@ -101,14 +105,7 @@ function parseMarkdownDocs(markdownDocs, options = {
 }
 
 function readAndParseMarkdownDocs(options) {
-  const manifestFilePath = getManifestFilePath();
-  if (!manifestFilePath) {
-    return [];
-  }
-  const manifest = readYamlFile(manifestFilePath);
-  if (!Array.isArray(manifest) || manifest.length < 1) {
-    return [];
-  }
+  const { manifestFilePath, manifest } = getMarkdownManifest();
   const markdownDocs = readAllMarkdownDocs(manifestFilePath, manifest);
   const htmlDocs = parseMarkdownDocs(markdownDocs, options);
   return htmlDocs;
