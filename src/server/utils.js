@@ -1,10 +1,23 @@
-import { isFileEdtionValid } from "../misc.js";
+import { isFileEdtionValid, isFileDirValid } from "../misc.js";
 
-export function deriveHTMLDocKeyFromDocInfo(key, lang, edtion) {
-  if (!key || !lang) {
+export function deriveMarkdownSourceVersionInfoFromManifest(markdownManifest) {
+  if (!Array.isArray(markdownManifest) || markdownManifest.length < 1) {
+    return;
+  }
+  const versionInfo = {};
+  markdownManifest.forEach(item => {
+    if (isFileDirValid(item.key)) {
+      versionInfo[`${item.key}Hash`] = item.hash;
+    }
+  });
+  return versionInfo;
+}
+
+export function deriveHTMLDocKeyFromDocInfo(source, key, lang, edtion) {
+  if (!source || !key || !lang) {
     return null;
   }
-  let docKey = `${lang}/${key}`;
+  let docKey = `${source}/${lang}/${key}`;
   if (edtion === undefined || edtion === null) {
     docKey += ".html";
     return docKey;
@@ -17,7 +30,7 @@ export function deriveHTMLDocKeyFromDocInfo(key, lang, edtion) {
 }
 
 export function getHTMLDocByDocInfo(htmlDocs, docInfo) {
-  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.key, docInfo.lang, docInfo.edtion);
+  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.source, docInfo.key, docInfo.lang, docInfo.edtion);
   if (!docKey) {
     return null;
   }

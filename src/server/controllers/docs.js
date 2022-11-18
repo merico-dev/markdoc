@@ -2,7 +2,7 @@ import { JSDOM } from "jsdom";
 
 import { getHTMLDocByDocInfo } from "../utils.js";
 
-export function retrieveDocs(criteria, htmlDocs) {
+export function retrieveDocs(criteria, markdownManifest, htmlDocs) {
   if (!Array.isArray(criteria) || criteria.length < 1) {
     return [];
   }
@@ -15,6 +15,8 @@ export function retrieveDocs(criteria, htmlDocs) {
     }
     const result = {
       criterion: item,
+      sourceHash: doc.sourceHash,
+      source: doc.source,
       lang: doc.lang,
       edtion: doc.edtion,
       info: doc.info,

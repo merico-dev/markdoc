@@ -58,7 +58,16 @@ export function getMarkdownManifest() {
     };
   }
   const manifestFilePath = path.resolve(__dirname, "../", manifestPath);
+  const { dir: manifestFileDir } = path.parse(manifestFilePath);
   const manifest = readYamlFile(manifestFilePath);
+  if (Array.isArray(manifest)) {
+    manifest.forEach(item => {
+      const markdownSourcePath = path.resolve(manifestFileDir, item.path);
+      const markdownSourceInfo = readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
+      item.key = markdownSourceInfo?.key;
+      item.name = markdownSourceInfo?.name;
+    });
+  }
   return {
     manifestFilePath,
     manifest,

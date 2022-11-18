@@ -2,10 +2,8 @@ import path from "path";
 import { keyBy } from "lodash-es";
 
 import {
-  MARKDOWN_SOURCE_INFO_FILE,
   MARKDOWN_SOURCE_LIB_DIR,
   MARKDOWN_EXTENSION,
-  readYamlFile,
   readFilePathListSync,
   getMarkdownManifest,
   isFileDirValid,
@@ -45,13 +43,12 @@ function readAllMarkdownDocs(manifestFilePath, markdownManifest) {
   const { dir: manifestFileDir } = path.parse(manifestFilePath);
   markdownManifest.forEach(item => {
     try {
-      const markdownSourcePath = path.resolve(manifestFileDir, item.path);
-      const markdownSourceInfo = readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
-      if (!isFileDirValid(markdownSourceInfo?.key)) {
+      if (!isFileDirValid(item.key)) {
         return;
       }
+      const markdownSourcePath = path.resolve(manifestFileDir, item.path);
       const libPath = path.join(markdownSourcePath, MARKDOWN_SOURCE_LIB_DIR);
-      const sourceDocs = readMarkdownSourceDocs(libPath, markdownSourceInfo.key, item.hash);
+      const sourceDocs = readMarkdownSourceDocs(libPath, item.key, item.hash);
       docs = docs.concat(sourceDocs);
     } catch (err) {
       console.error(err);
@@ -82,6 +79,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     if (options?.decorate) {
       html = compileWithTemplate(html, data.data, {
         source: fileSource,
+        "source-hash": sourceHash,
         lang: fileLang,
         edtion: fileEdtion,
       });

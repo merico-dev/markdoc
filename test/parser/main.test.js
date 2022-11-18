@@ -1,12 +1,9 @@
-import path from "path";
 import dotenv from "dotenv";
 import { expect } from "@hapi/code";
 import * as Lab from "@hapi/lab";
 
 import {
-  MARKDOWN_SOURCE_INFO_FILE,
   getMarkdownManifest,
-  readYamlFile,
   isFileDirValid,
 } from "../../src/misc.js";
 import { getAllDocsForPublishing, getAllDocsForServing } from "../../src/parser/main.js";
@@ -14,14 +11,12 @@ import { getAllDocsForPublishing, getAllDocsForServing } from "../../src/parser/
 const lab = Lab.script();
 const { suite, test, before } = lab;
 
-function getMarkdownSourceInfo() {
-  const { manifestFilePath, manifest } = getMarkdownManifest();
-  if (!manifestFilePath || !Array.isArray(manifest) || manifest.length < 1) {
+function getMarkdownSourceKey() {
+  const { manifest } = getMarkdownManifest();
+  if (!Array.isArray(manifest) || manifest.length < 1) {
     return null;
   }
-  const { dir: manifestFileDir } = path.parse(manifestFilePath);
-  const markdownSourcePath = path.resolve(manifestFileDir, manifest[0].path);
-  return readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
+  return manifest[0].key;
 }
 
 suite("Testing Parser", () => {
@@ -31,8 +26,7 @@ suite("Testing Parser", () => {
 
   before(() => {
     dotenv.config();
-    const markdownSourceInfo = getMarkdownSourceInfo();
-    markdownSourceKey = markdownSourceInfo?.key;
+    markdownSourceKey = getMarkdownSourceKey();
     if (isFileDirValid(markdownSourceKey)) {
       docsForPublishing = getAllDocsForPublishing();
       docsForServing = getAllDocsForServing();

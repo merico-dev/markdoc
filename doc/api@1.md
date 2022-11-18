@@ -4,7 +4,7 @@ API 解释说明。
 
 ---
 
-### `GET` api/v2/version
+### `GET` api/v1/version
 
 **描述**
 
@@ -18,24 +18,19 @@ API 解释说明。
 
 ```json
 {
-  "packageVersion": "2.0.0",
-  "buildVersion": "v2.0.0",
-  "buildHash": "07f275d35f95d9e2ed11edec4447811163ca66de",
-  "docsVersionInfo": {
-    "tutorialHash": "abc03519a503df0d3a7d47d4032e55be4a087123",
-    "helpHash": "def03519a503df0d3a7d47d4032e55be4a087456"
-  }
+  "packageVersion": "1.1.3",
+  "buildVersion": "v1.1.3",
+  "buildHash": "07f275d35f95d9e2ed11edec4447811163ca66de"
 }
 ```
 
 - `packageVersion` 表示 NPM 软件包版本号，该值来源于 `package.json` 中的 `version` 字段。
 - `buildVersion` 表示构建代码的（可读）版本号，该值来源于启动服务器时传入的 `BUILD_VERSION` 环境变量。若启动时未传入 `BUILD_VERSION` 环境变量，则该值为 `undefined`。
 - `buildHash` 表示构建代码所对应的提交哈希值，该值来源于启动服务器时传入的 `BUILD_HASH` 环境变量。若启动时未传入 `BUILD_HASH` 环境变量，则该值为 `undefined`。
-- `docsVersionInfo` 表示文档源版本信息，如果服务器启动时没有传入任何文档源，则该值为 `undefined`。如果启动时传入了文档源，则文档源的版本信息会附加到该字段，例如服务器启动时传入了 `tutorial` 和 `help` 两个文档源，那么 `docsVersionInfo` 下则会有 `tutorialHash` 和 `helpHash` 两个字段，分别表示两个文档源对应的提交哈希值。
 
 ---
 
-### `POST` api/v2/docs
+### `POST` api/v1/docs
 
 **描述**
 
@@ -46,9 +41,8 @@ API 解释说明。
 ```json
 [
   {
-    "source": "tutorial",
+    "key": "test",
     "lang": "zh",
-    "file": "test",
     "edtion": 3,
     "sections": [
       "awards"
@@ -57,9 +51,8 @@ API 解释说明。
 ]
 ```
 
-- `source` 表示要获取的文档来自于哪个文档源，这个 `source` 即是某个文档源的配置信息（`md.yaml`）中的 `key` 字段的值。
-- `lang` 表示要获取的文档的语言。
-- `file` 表示要获取的文档的标识符，这个 `file` 即是文档的文件名。
+- `key` 表示要获取的文档的唯一标识符，这个 `key` 要和文档的文件名一致。
+- `lang` 表示要获取的文档的语言，目前支持 `zh`/`en` 两种。
 - `edtion` 可选参数，表示要获取的文档的版本，如果传入了 `edtion`，则 `edtion` 必须为正整数（且小于 2^53）。
 - `sections` 可选参数，表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
 
@@ -69,16 +62,13 @@ API 解释说明。
 [
   {
     "criterion": {
-      "source": "tutorial",
+      "key": "test",
       "lang": "zh",
-      "file": "test",
       "edtion": 3,
       "sections": [
         "awards"
       ]
     },
-    "sourceHash": "07f275d35f95d9e2ed11edec4447811163ca66de",
-    "source": "tutorial",
     "lang": "zh",
     "edtion": 3,
     "info": {
@@ -97,8 +87,6 @@ API 解释说明。
 ```
 
 - `criterion` 表示请求信息。
-- `sourceHash` 表示文档源版本的提交哈希值，如果文档源没有版本哈希值，则返回 `null`。
-- `source` 表示文档源。
 - `lang` 表示文档语言。
 - `edtion` 表示文档版本，如果文档没有版本，则返回 `null`。
 - `info` 表示文档信息，这部分数据来源于 Markdown 文档的 Front Matter 数据。
