@@ -1,10 +1,16 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+import yaml from "yaml";
 
-export const DOC_ENCODING = "utf8";
+export const FILE_ENCODING = "utf8";
+export const MARKDOWN_SOURCE_INFO_FILE = "md.yaml";
+export const MARKDOWN_SOURCE_LIB_DIR = "md/";
+export const MARKDOWN_EXTENSION = "md";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // HTML Data Attributes 仅可由小写英文字符和连字符组成
-// 且必须以小写英文字符开头和结尾，且多个连字符不能相连，且不能以 xml 打头
+// 且必须以小写英文字符打头和结尾（但不能以 xml 打头），且多个连字符不能相连
 export function isDataAttrNamingValid(naming) {
   if (typeof naming !== "string") {
     return false;
@@ -15,9 +21,9 @@ export function isDataAttrNamingValid(naming) {
   return (/^[a-z]([a-z]*\-?[a-z])*$/).test(naming);
 }
 
-// 合法的文件 version 必须为正整数（且小于 2^53）
-export function isFileVersionValid(version) {
-  return Number.isSafeInteger(version) && version >= 1;
+// 合法的文件 edtion 必须为正整数（且小于 2^53）
+export function isFileEdtionValid(edtion) {
+  return Number.isSafeInteger(edtion) && edtion >= 1;
 }
 
 // 合法的目录名仅可由英文字符、连字符、下划线组成，且必须以英文字符开头和结尾
@@ -30,6 +36,41 @@ export function isFileDirValid(dir) {
 
 export function isUnixHiddenPath(filePath) {
   return (/(^|\/)\.[^\/\.]/g).test(filePath);
+}
+
+export function readYamlFile(filePath) {
+  let data = null;
+  try {
+    const file = fs.readFileSync(filePath, FILE_ENCODING);
+    data = yaml.parse(file);
+  } catch (err) {
+    console.error(err);
+  }
+  return data;
+}
+
+export function getMarkdownManifest(manifestPath) {
+  if (!manifestPath) {
+    return {
+      manifestFilePath: null,
+      manifest: null,
+    };
+  }
+  const manifestFilePath = path.resolve(__dirname, "../", manifestPath);
+  const { dir: manifestFileDir } = path.parse(manifestFilePath);
+  const manifest = readYamlFile(manifestFilePath);
+  if (Array.isArray(manifest)) {
+    manifest.forEach(item => {
+      const markdownSourcePath = path.resolve(manifestFileDir, item.path);
+      const markdownSourceInfo = readYamlFile(path.join(markdownSourcePath, MARKDOWN_SOURCE_INFO_FILE));
+      item.key = markdownSourceInfo?.key;
+      item.name = markdownSourceInfo?.name;
+    });
+  }
+  return {
+    manifestFilePath,
+    manifest,
+  };
 }
 
 export function readFilePathListSync(fromPath, extension) {
@@ -62,7 +103,7 @@ export function writeFiles(files) {
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
     }
-    fs.writeFileSync(item.path, item.data, DOC_ENCODING);
+    fs.writeFileSync(item.path, item.data, FILE_ENCODING);
   });
 }
 
@@ -78,20 +119,23 @@ export function splitOnce(str, separator) {
 }
 
 // 关于文件版本的定义规则请见「文档版本设计说明」
-export function deriveFileVersionFromFileName(fileName) {
+export function deriveFileEdtionFromFileName(fileName) {
   if (typeof fileName !== "string") {
     return null;
   }
-  const [, fileVersionStr] = splitOnce(fileName, "@");
-  const fileVersion = Number(fileVersionStr);
-  return isFileVersionValid(fileVersion) ? fileVersion : null;
+  const [, fileEdtionStr] = splitOnce(fileName, "@");
+  const fileEdtion = Number(fileEdtionStr);
+  return isFileEdtionValid(fileEdtion) ? fileEdtion : null;
 }
 
-// 关于文件语言的定义规则请见「README」
-export function deriveFileLangFromFileDir(fileDir) {
+// 关于文件目录的定义规则请见「README」
+export function deriveFileSourceAndLangFromFileDir(fileDir) {
   if (typeof fileDir !== "string") {
     return null;
   }
-  const [lang] = fileDir.split(path.sep);
-  return isFileDirValid(lang) ? lang : null;
+  const [source, lang] = fileDir.split(path.sep);
+  return [
+    isFileDirValid(source) ? source : null,
+    isFileDirValid(lang) ? lang : null,
+  ];
 }

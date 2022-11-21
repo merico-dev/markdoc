@@ -1,0 +1,7 @@
+-
+  # 必选，文档源资源的存放路径
+  path: "./"
+  # 可选，文档源仓库的提交哈希值
+  hash: "07f275d35f95d9e2ed11edec4447811163ca66de"
+  # 可选，文档源仓库的 URL
+  url: "https://github.com/merico-dev/markdoc"

@@ -1,11 +1,12 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
-import { writeFiles } from "./misc.js";
+import { getMarkdownManifest, writeFiles } from "./misc.js";
 import { getAllDocsForPublishing } from "./parser/main.js";
 
-const HTML_WRITE_PATH = "../public/docs";
+const HTML_WRITE_PATH = "../public/output";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function cleanTargetDir(targetPath) {
@@ -21,7 +22,9 @@ function writeHtmlDocs(htmlDocs) {
 }
 
 function run() {
-  const allDocs = getAllDocsForPublishing();
+  dotenv.config();
+  const { manifestFilePath, manifest } = getMarkdownManifest(process.env.MARKDOWN_MANIFEST);
+  const allDocs = getAllDocsForPublishing(manifestFilePath, manifest);
   cleanTargetDir(path.join(__dirname, HTML_WRITE_PATH));
   writeHtmlDocs(allDocs);
 }

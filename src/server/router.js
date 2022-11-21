@@ -8,12 +8,12 @@ export function initRouters(serverInstance) {
   });
   serverInstance.route({
     method: "GET",
-    path: "/api/v1/version",
+    path: "/api/v2/version",
     handler: handleVersion,
   });
   serverInstance.route({
     method: "POST",
-    path: "/api/v1/docs",
+    path: "/api/v2/docs",
     handler: handleDocs,
   });
 }

@@ -17,10 +17,14 @@ export function createServer(host = "localhost", port = 3000) {
   return server;
 }
 
-function decorateServer(serverInstance, allDocs) {
+function decorateServer(serverInstance, markdownManifest, allDocs) {
+  if (!Array.isArray(markdownManifest)) {
+    throw new Error("Server decorating error: manifest not found");
+  }
   if (!allDocs) {
     throw new Error("Server decorating error: documents not found");
   }
+  serverInstance.decorate("request", "markdownManifest", markdownManifest);
   serverInstance.decorate("request", "allDocs", allDocs);
 }
 
@@ -34,8 +38,8 @@ async function registerPlugins(serverInstance) {
   });
 }
 
-export async function startServer(serverInstance, allDocs) {
-  decorateServer(serverInstance, allDocs);
+export async function startServer(serverInstance, markdownManifest, allDocs) {
+  decorateServer(serverInstance, markdownManifest, allDocs);
   await registerPlugins(serverInstance);
   initRouters(serverInstance);
 
@@ -44,8 +48,8 @@ export async function startServer(serverInstance, allDocs) {
 }
 
 // just for testing
-export async function initServer(serverInstance, allDocs) {
-  decorateServer(serverInstance, allDocs);
+export async function initServer(serverInstance, markdownManifest, allDocs) {
+  decorateServer(serverInstance, markdownManifest, allDocs);
   initRouters(serverInstance);
 
   await serverInstance.initialize();

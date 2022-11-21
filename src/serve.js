@@ -1,13 +1,15 @@
 import dotenv from "dotenv";
 
+import { getMarkdownManifest } from "./misc.js";
 import { getAllDocsForServing } from "./parser/main.js";
 import { createServer, startServer } from "./server/main.js";
 
 function run() {
   dotenv.config();
+  const { manifestFilePath, manifest } = getMarkdownManifest(process.env.MARKDOWN_MANIFEST);
+  const allDocs = getAllDocsForServing(manifestFilePath, manifest);
   const server = createServer(process.env.SERVER_HOST, process.env.SERVER_PORT);
-  const allDocs = getAllDocsForServing();
-  startServer(server, allDocs);
+  startServer(server, manifest, allDocs);
 }
 
 process.on("unhandledRejection", (err) => {
