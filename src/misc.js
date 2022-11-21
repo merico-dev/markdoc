@@ -49,8 +49,7 @@ export function readYamlFile(filePath) {
   return data;
 }
 
-export function getMarkdownManifest() {
-  const manifestPath = process.env.MARKDOWN_MANIFEST;
+export function getMarkdownManifest(manifestPath) {
   if (!manifestPath) {
     return {
       manifestFilePath: null,

@@ -11,14 +11,6 @@ import { getAllDocsForPublishing, getAllDocsForServing } from "../../src/parser/
 const lab = Lab.script();
 const { suite, test, before } = lab;
 
-function getMarkdownSourceKey() {
-  const { manifest } = getMarkdownManifest();
-  if (!Array.isArray(manifest) || manifest.length < 1) {
-    return null;
-  }
-  return manifest[0].key;
-}
-
 suite("Testing Parser", () => {
   let markdownSourceKey;
   let docsForPublishing;
@@ -26,10 +18,13 @@ suite("Testing Parser", () => {
 
   before(() => {
     dotenv.config();
-    markdownSourceKey = getMarkdownSourceKey();
+    const { manifestFilePath, manifest } = getMarkdownManifest(process.env.MARKDOWN_MANIFEST);
+    if (Array.isArray(manifest) && manifest.length >= 1) {
+      markdownSourceKey = manifest[0].key;
+    }
     if (isFileDirValid(markdownSourceKey)) {
-      docsForPublishing = getAllDocsForPublishing();
-      docsForServing = getAllDocsForServing();
+      docsForPublishing = getAllDocsForPublishing(manifestFilePath, manifest);
+      docsForServing = getAllDocsForServing(manifestFilePath, manifest);
     }
   });
 

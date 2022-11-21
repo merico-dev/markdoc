@@ -17,9 +17,9 @@ describe("Testing Server", () => {
 
   before({ timeout: 1000 }, async () => {
     dotenv.config();
-    const { manifest } = getMarkdownManifest();
+    const { manifestFilePath, manifest } = getMarkdownManifest(process.env.MARKDOWN_MANIFEST);
     markdownManifest = manifest;
-    allDocs = getAllDocsForServing();
+    allDocs = getAllDocsForServing(manifestFilePath, manifest);
     server = createServer(process.env.TEST_SERVER_HOST, process.env.TEST_SERVER_PORT);
     await initServer(server, manifest, allDocs);
   });

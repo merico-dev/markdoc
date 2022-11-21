@@ -6,8 +6,8 @@ import { createServer, startServer } from "./server/main.js";
 
 function run() {
   dotenv.config();
-  const { manifest } = getMarkdownManifest();
-  const allDocs = getAllDocsForServing();
+  const { manifestFilePath, manifest } = getMarkdownManifest(process.env.MARKDOWN_MANIFEST);
+  const allDocs = getAllDocsForServing(manifestFilePath, manifest);
   const server = createServer(process.env.SERVER_HOST, process.env.SERVER_PORT);
   startServer(server, manifest, allDocs);
 }

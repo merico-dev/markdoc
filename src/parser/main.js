@@ -5,7 +5,6 @@ import {
   MARKDOWN_SOURCE_LIB_DIR,
   MARKDOWN_EXTENSION,
   readFilePathListSync,
-  getMarkdownManifest,
   isFileDirValid,
   deriveFileSourceAndLangFromFileDir,
   deriveFileEdtionFromFileName,
@@ -102,23 +101,22 @@ function parseMarkdownDocs(markdownDocs, options = {
   return htmlDocs;
 }
 
-function readAndParseMarkdownDocs(options) {
-  const { manifestFilePath, manifest } = getMarkdownManifest();
+function readAndParseMarkdownDocs(manifestFilePath, manifest, parsingOptions) {
   const markdownDocs = readAllMarkdownDocs(manifestFilePath, manifest);
-  const htmlDocs = parseMarkdownDocs(markdownDocs, options);
+  const htmlDocs = parseMarkdownDocs(markdownDocs, parsingOptions);
   return htmlDocs;
 }
 
-export function getAllDocsForPublishing() {
-  return readAndParseMarkdownDocs({
+export function getAllDocsForPublishing(manifestFilePath, manifest) {
+  return readAndParseMarkdownDocs(manifestFilePath, manifest, {
     sanitize: true,
     decorate: true,
     minify: true,
   });
 }
 
-export function getAllDocsForServing() {
-  const allDocs = readAndParseMarkdownDocs({
+export function getAllDocsForServing(manifestFilePath, manifest) {
+  const allDocs = readAndParseMarkdownDocs(manifestFilePath, manifest, {
     sanitize: true,
     minify: true,
   });
