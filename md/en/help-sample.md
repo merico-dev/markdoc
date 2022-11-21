@@ -5,7 +5,7 @@
   "created_at": "2022-08-05",
   "authors": ["dingding.zhang@merico.dev"],
   "tags": ["Dev equivalent", "Accumulated"],
-  "about": "https://github.com/merico-dev/markdoc/blob/main/md/en/sample.md"
+  "about": "https://github.com/merico-dev/markdoc/blob/main/md/en/help-sample.md"
 }
 ---
 # Accumulated dev equivalent
