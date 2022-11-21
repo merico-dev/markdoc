@@ -60,8 +60,8 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "not-exist",
-        "key": "test",
-        "lang": "en"
+        "lang": "en",
+        "file": "test"
       }]
     });
     expect(res1.statusCode).to.equal(200);
@@ -73,8 +73,8 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "not-exist",
-        "lang": "en"
+        "lang": "en",
+        "file": "not-exist"
       }]
     });
     expect(res2.statusCode).to.equal(200);
@@ -86,8 +86,8 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
-        "lang": "en"
+        "lang": "en",
+        "file": "test"
       }]
     });
     expect(res3.statusCode).to.equal(200);
@@ -98,9 +98,11 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "edtion": 2
+        "file": "test",
+        "options": {
+          "edtion": 2
+        }
       }]
     });
     expect(res4.statusCode).to.equal(200);
@@ -112,9 +114,11 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "edtion": "3"
+        "file": "test",
+        "options": {
+          "edtion": "3"
+        }
       }]
     });
     expect(res5.statusCode).to.equal(200);
@@ -126,9 +130,11 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "edtion": 3
+        "file": "test",
+        "options": {
+          "edtion": 3
+        }
       }]
     });
     expect(res6.statusCode).to.equal(200);
@@ -140,11 +146,13 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "sections": [
-          "not-exist"
-        ]
+        "file": "test",
+        "options": {
+          "sections": [
+            "not-exist"
+          ]
+        }
       }]
     });
     expect(res7.statusCode).to.equal(200);
@@ -157,11 +165,13 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "sections": [
-          "awards"
-        ]
+        "file": "test",
+        "options": {
+          "sections": [
+            "awards"
+          ]
+        }
       }]
     });
     expect(res8.statusCode).to.equal(200);
@@ -175,15 +185,17 @@ describe("Testing Server", () => {
       url: "/api/v2/docs",
       payload: [{
         "source": "tutorial",
-        "key": "test",
-        "lang": "ja"
+        "lang": "ja",
+        "file": "test"
       }, {
         "source": "tutorial",
-        "key": "test",
         "lang": "en",
-        "sections": [
-          "awards"
-        ]
+        "file": "test",
+        "options": {
+          "sections": [
+            "awards"
+          ]
+        }
       }]
     });
     expect(res9.statusCode).to.equal(200);

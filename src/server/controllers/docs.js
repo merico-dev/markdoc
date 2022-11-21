@@ -1,6 +1,6 @@
-import { JSDOM } from "jsdom";
-
 import { getHTMLDocByDocInfo } from "../utils.js";
+
+import { queryFragmentsFromHtmlDoc } from "./selectors/sections.js";
 
 export function retrieveDocs(criteria, htmlDocs) {
   if (!Array.isArray(criteria) || criteria.length < 1) {
@@ -13,26 +13,14 @@ export function retrieveDocs(criteria, htmlDocs) {
       results.push(null);
       return;
     }
-    const result = {
+    results.push({
       criterion: item,
       sourceHash: doc.sourceHash,
-      source: doc.source,
       lang: doc.lang,
       edtion: doc.edtion,
       info: doc.info,
-      data: [],
-    };
-    if (!Array.isArray(item.sections) || item.sections.length < 1) {
-      result.data.push(doc.data);
-      results.push(result);
-      return;
-    }
-    const fragment = JSDOM.fragment(doc.data);
-    item.sections.forEach(section => {
-      const element = fragment.querySelector(`[data-section=${section}]`);
-      result.data.push(element?.outerHTML ?? null);
+      data: queryFragmentsFromHtmlDoc(doc.data, item.options?.sections),
     });
-    results.push(result);
   });
   return results;
 }

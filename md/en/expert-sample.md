@@ -14,43 +14,47 @@ Test coverage is proportion of functions covered by test cases to total function
 
 ## Introduction
 
-Blah blah...
+In computer science, test coverage is a percentage measure of the degree to which the source code of a program is executed when a particular test suite is run. A program with high test coverage has more of its source code executed during testing, which suggests it has a lower chance of containing undetected software bugs compared to a program with low test coverage.
 
-<div data-section="latest_benchmarking">
+## Formula
 
-Latest benchmarking of test coverage.
+Test coverage = Number of functions covered by test cases / Number of total functions
 
-<div data-conclusion="good">
+## Conclusions
+
+<div data-section="latest_benchmarking_good">
+
+{[;category]}Latest benchmarking of test coverage.
 
 ###### Above industry standard
 
-Latest benchmarking of test coverage is above industry standard.
+Latest benchmarking of test coverage of {[@subject]} is above industry standard.
 
 </div>
 
-<div data-conclusion="fair">
+<div data-section="latest_benchmarking_fair">
+
+{[;category]}Latest benchmarking of test coverage.
 
 ###### Conform to industry standard
 
-Latest benchmarking of test coverage meets industry standard.
+Latest benchmarking of test coverage of {[@subject]} meets industry standard.
 
 </div>
 
-<div data-conclusion="below">
+<div data-section="latest_benchmarking_below">
+
+{[;category]}Latest benchmarking of test coverage.
 
 ###### Below industry standard
 
-Latest benchmarking of test coverage is below industry standard.
+Latest benchmarking of test coverage of {[@subject]} is below industry standard.
 
 </div>
 
-</div>
+<div data-section="historical_benchmarking_good">
 
-<div data-section="historical_benchmarking">
-
-Historical benchmarking of test coverage.
-
-<div data-conclusion="good">
+{[;category]}Historical benchmarking of test coverage.
 
 ###### Above industry standard
 
@@ -58,7 +62,9 @@ Historical benchmarking of test coverage is above industry standard.
 
 </div>
 
-<div data-conclusion="fair">
+<div data-section="historical_benchmarking_fair">
+
+{[;category]}Historical benchmarking of test coverage.
 
 ###### Conform to industry standard
 
@@ -66,20 +72,12 @@ Historical benchmarking of test coverage meets industry standard.
 
 </div>
 
-<div data-conclusion="below">
+<div data-section="historical_benchmarking_below">
+
+{[;category]}Historical benchmarking of test coverage.
 
 ###### Below industry standard
 
 Historical benchmarking of test coverage is below industry standard.
 
 </div>
-
-</div>
-
-## Rule
-
-Blah blah...
-
-## Reference
-
-Blah blah...

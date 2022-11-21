@@ -144,19 +144,31 @@ Currently, using our own `npm run parse` to compile Markdown, the generated HTML
 
 Currently, using our own `npm run parse` to compile Markdown, the generated HTML document will have [GitHub Markdown's code highlighting styles](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) built in, but you can switch to our own code highlighting styles or remove code highlighting if needed.
 
-### Document section
+### Document chunks and custom HTML attributes
 
 If the document has the need to be displayed in chunks in the future, you can also use the built-in HTML code block wrapped up to facilitate the display and collapse of the document. For example.
 
 ```markdown
 <div data-section="synopsis">
+
 ## Plot synopsis
 
 Lee (Casey Affleck) is a decrepit and depressed repairman, after learning of the death of his brother Joe (Kyle Chandler), Lee returned to his hometown...
+
 </div>
 ```
 
 > We have agreed that the identifying attribute for a section is `data-section`, the value of `data-section` is unique within the same document, and naming convention is the same as that for custom ID (for example, here `synopsis` is a legal name).
+
+The identification name of a document block can be represented by the `data-<attr>` attribute within the HTML code block, and the naming of the `<attr>` should follow the following rules:
+
+- You should only use: `a-z`/`-`
+- Must start and end with `a-z` (and can NOT start with `xml`, it's a HTML rule)
+- Multiple hyphens cannot be connected
+
+For example, `data-section` here is a legal attribute; `data--section` or `data-section2` or `data-sectionB` are not legal attributes.
+
+The naming of attribute value follows the above naming rules of custom ID, for example, `synopsis` is a legal name here.
 
 ### Others
 
@@ -170,3 +182,5 @@ If you want to reference a static resource such as an image in a document, pleas
 - [CommonMark: A Formal Specification For Markdown](https://www.smashingmagazine.com/2020/12/commonmark-formal-specification-markdown/)
 - [A formal spec for GitHub Flavored Markdown](https://github.blog/2017-03-14-a-formal-spec-for-github-markdown/)
 - [Writing on GitHub - Basic writing and formatting syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+- [Using HTML data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes)
+- [HTML data-* global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*)

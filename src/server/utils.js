@@ -13,11 +13,11 @@ export function deriveMarkdownSourceVersionInfoFromManifest(markdownManifest) {
   return versionInfo;
 }
 
-export function deriveHTMLDocKeyFromDocInfo(source, key, lang, edtion) {
-  if (!source || !key || !lang) {
+export function deriveHTMLDocKeyFromDocInfo(source, lang, file, edtion) {
+  if (!source || !lang || !file) {
     return null;
   }
-  let docKey = `${source}/${lang}/${key}`;
+  let docKey = `${source}/${lang}/${file}`;
   if (edtion === undefined || edtion === null) {
     docKey += ".html";
     return docKey;
@@ -30,7 +30,7 @@ export function deriveHTMLDocKeyFromDocInfo(source, key, lang, edtion) {
 }
 
 export function getHTMLDocByDocInfo(htmlDocs, docInfo) {
-  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.source, docInfo.key, docInfo.lang, docInfo.edtion);
+  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.source, docInfo.lang, docInfo.file, docInfo.options?.edtion);
   if (!docKey) {
     return null;
   }

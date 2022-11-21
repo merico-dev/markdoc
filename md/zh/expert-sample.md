@@ -14,43 +14,47 @@
 
 ## 简介
 
-Blah blah...
+在计算机科学中，测试覆盖度是对运行特定测试套件时程序源代码被执行的程度的百分比测量。测试覆盖度高的程序在测试过程中执行了更多的源代码，这表明与测试覆盖度低的程序相比，它包含未检测到的软件错误的可能性更低。
 
-<div data-section="latest_benchmarking">
+## 计算公式
 
-测试覆盖度当前情况。
+测试覆盖度 = 被测试用例覆盖的函数 / 总函数
 
-<div data-conclusion="good">
+## 结论
+
+<div data-section="latest_benchmarking_good">
+
+{[;category]}测试覆盖度当前情况。
 
 ###### 当前高于行业标准
 
-测试覆盖度当前高于行业标准。
+{[@subject]}的测试覆盖度当前高于行业标准。
 
 </div>
 
-<div data-conclusion="fair">
+<div data-section="latest_benchmarking_fair">
+
+{[;category]}测试覆盖度当前情况。
 
 ###### 当前符合行业标准
 
-测试覆盖度当前符合行业标准。
+{[@subject]}的测试覆盖度当前符合行业标准。
 
 </div>
 
-<div data-conclusion="below">
+<div data-section="latest_benchmarking_below">
+
+{[;category]}测试覆盖度当前情况。
 
 ###### 当前低于行业标准
 
-测试覆盖度当前低于行业标准。
+{[@subject]}的测试覆盖度当前低于行业标准。
 
 </div>
 
-</div>
+<div data-section="historical_benchmarking_good">
 
-<div data-section="historical_benchmarking">
-
-测试覆盖度历史情况。
-
-<div data-conclusion="good">
+{[;category]}测试覆盖度历史情况。
 
 ###### 总体高于行业标准
 
@@ -58,7 +62,9 @@ Blah blah...
 
 </div>
 
-<div data-conclusion="fair">
+<div data-section="historical_benchmarking_fair">
+
+{[;category]}测试覆盖度历史情况。
 
 ###### 总体符合行业标准
 
@@ -66,20 +72,12 @@ Blah blah...
 
 </div>
 
-<div data-conclusion="below">
+<div data-section="historical_benchmarking_below">
+
+{[;category]}测试覆盖度历史情况。
 
 ###### 总体低于行业标准
 
 测试覆盖度总体低于行业标准。
 
 </div>
-
-</div>
-
-## 规则
-
-Blah blah...
-
-## 引用
-
-Blah blah...

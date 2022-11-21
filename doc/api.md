@@ -18,8 +18,8 @@ API 解释说明。
 
 ```json
 {
-  "packageVersion": "2.0.0",
-  "buildVersion": "v2.0.0",
+  "packageVersion": "2.1.0",
+  "buildVersion": "v2.1.0",
   "buildHash": "07f275d35f95d9e2ed11edec4447811163ca66de",
   "docsVersionInfo": {
     "tutorialHash": "abc03519a503df0d3a7d47d4032e55be4a087123",
@@ -49,10 +49,12 @@ API 解释说明。
     "source": "tutorial",
     "lang": "zh",
     "file": "test",
-    "edtion": 3,
-    "sections": [
-      "awards"
-    ]
+    "options": {
+      "edtion": 3,
+      "sections": [
+        "awards"
+      ]
+    }
   }
 ]
 ```
@@ -60,8 +62,9 @@ API 解释说明。
 - `source` 表示要获取的文档来自于哪个文档源，这个 `source` 即是某个文档源的配置信息（`md.yaml`）中的 `key` 字段的值。
 - `lang` 表示要获取的文档的语言。
 - `file` 表示要获取的文档的标识符，这个 `file` 即是文档的文件名。
-- `edtion` 可选参数，表示要获取的文档的版本，如果传入了 `edtion`，则 `edtion` 必须为正整数（且小于 2^53）。
-- `sections` 可选参数，表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
+- `options` 可选参数，字段如下：
+  - `edtion` 表示要获取的文档的版本，如果传入了 `edtion`，则 `edtion` 必须为正整数（且小于 2^53）。
+  - `sections` 表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
 
 **返回值**
 
@@ -72,13 +75,14 @@ API 解释说明。
       "source": "tutorial",
       "lang": "zh",
       "file": "test",
-      "edtion": 3,
-      "sections": [
-        "awards"
-      ]
+      "options": {
+        "edtion": 3,
+        "sections": [
+          "awards"
+        ]
+      }
     },
     "sourceHash": "07f275d35f95d9e2ed11edec4447811163ca66de",
-    "source": "tutorial",
     "lang": "zh",
     "edtion": 3,
     "info": {
@@ -98,7 +102,6 @@ API 解释说明。
 
 - `criterion` 表示请求信息。
 - `sourceHash` 表示文档源版本的提交哈希值，如果文档源没有版本哈希值，则返回 `null`。
-- `source` 表示文档源。
 - `lang` 表示文档语言。
 - `edtion` 表示文档版本，如果文档没有版本，则返回 `null`。
 - `info` 表示文档信息，这部分数据来源于 Markdown 文档的 Front Matter 数据。
