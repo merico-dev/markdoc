@@ -15,5 +15,5 @@ export function handleVersion(request) {
 }
 
 export function handleDocs(request) {
-  return retrieveDocs(request.payload, request.markdownManifest, request.allDocs);
+  return retrieveDocs(request.payload, request.allDocs);
 }
