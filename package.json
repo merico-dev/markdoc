@@ -1,6 +1,6 @@
 {
   "name": "markdoc",
-  "version": "2.1.0",
+  "version": "2.1.3",
   "description": "parse markdown to html",
   "exports": "./src/index.js",
   "scripts": {

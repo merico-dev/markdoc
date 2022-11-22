@@ -144,9 +144,9 @@ Currently, using our own `npm run parse` to compile Markdown, the generated HTML
 
 Currently, using our own `npm run parse` to compile Markdown, the generated HTML document will have [GitHub Markdown's code highlighting styles](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) built in, but you can switch to our own code highlighting styles or remove code highlighting if needed.
 
-### Document chunks and custom HTML attributes
+### Document fragments and custom HTML attributes
 
-If the document has the need to be displayed in chunks in the future, you can also use the built-in HTML code block wrapped up to facilitate the display and collapse of the document. For example.
+If the document has the need to be displayed in fragments in the future, you can also use the built-in HTML code block wrapped up to facilitate the display and collapse of the document content. For example:
 
 ```markdown
 <div data-section="synopsis">
@@ -158,8 +158,6 @@ Lee (Casey Affleck) is a decrepit and depressed repairman, after learning of the
 </div>
 ```
 
-> We have agreed that the identifying attribute for a section is `data-section`, the value of `data-section` is unique within the same document, and naming convention is the same as that for custom ID (for example, here `synopsis` is a legal name).
-
 The identification name of a document block can be represented by the `data-<attr>` attribute within the HTML code block, and the naming of the `<attr>` should follow the following rules:
 
 - You should only use: `a-z`/`-`
@@ -169,6 +167,8 @@ The identification name of a document block can be represented by the `data-<att
 For example, `data-section` here is a legal attribute; `data--section` or `data-section2` or `data-sectionB` are not legal attributes.
 
 The naming of attribute value follows the above naming rules of custom ID, for example, `synopsis` is a legal name here.
+
+> In fact, our document server has a built-in service for parsing the `data-section` attribute. As long as the `options.sections` attribute is set in the request parameters, the server will return the corresponding document sections when processing the document, as described in the [API documentation](../../doc/api.md). One thing to note is that the value of the `data-section` attribute should ideally be unique within the same document; even if the same `data-section` attribute value is set for multiple document fragments, the server will only return the first document fragment in which the attribute value of the `data-section` occurred.
 
 ### Others
 

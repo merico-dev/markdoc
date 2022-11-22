@@ -144,9 +144,9 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 
 目前使用我们自己的 `npm run parse` 命令编译 Markdown，生成的 HTML 文档会内置 [GitHub Markdown 的代码高亮样式](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css)，如果有需要，可以替换为我们自己的代码高亮样式或者删除代码高亮功能。
 
-### 文档分块与自定义 HTML 属性
+### 文档片段与自定义 HTML 属性
 
-如果将来文档有分块展示的需求，还可以使用内置的 HTML 代码块包裹起来，方便文档的展示与折叠。例如：
+如果将来文档有分段展示的需求，还可以使用内置的 HTML 代码块包裹起来，方便文档内容的展示与折叠。例如：
 
 ```markdown
 <div data-section="synopsis">
@@ -158,7 +158,7 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 </div>
 ```
 
-文档块的标识名可通过 HTML 代码块内的 `data-<attr>` 属性来表示，其中 `<attr>` 的命名遵循以下规则：
+文档片段的标识名可通过 HTML 代码块内的 `data-<attr>` 属性来表示，其中 `<attr>` 的命名遵循以下规则：
 
 - 仅可由 `小写英文字母` 和 `-` 组成
 - 必须以小写英文字母开头和结尾（但不能以 `xml` 打头，这是 HTML 规定）
@@ -167,6 +167,8 @@ Front Matter，扉页，即书本翻开以后的第一页。在 Markdown 中，F
 例如这里的 `data-section` 就是一个合法的属性，`data--section` 或 `data-section2` 或 `data-sectionB` 都不是合法的属性。
 
 至于属性值的命名则遵循**自定义 ID**的命名规则，比如这里的 `synopsis` 就是一个合法的命名。
+
+> 事实上，我们的文档服务器内置了对 `data-section` 属性的解析服务，只要在请求参数中设置了 `options.sections` 的属性，服务器在处理文档时便会返回对应的文档片段，具体使用方法见 [API 文档](../../doc/api.md)。有一点需要注意的是，`data-section` 属性的值最好在同一文档内唯一，即便给多个文档片段设置了相同的 `data-section` 属性值，服务器也只会返回第一个出现 `data-section` 属性值的文档片段。
 
 ### 其他
 
