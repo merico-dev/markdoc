@@ -101,7 +101,7 @@ describe("Testing Server", () => {
         "lang": "en",
         "file": "test",
         "options": {
-          "edtion": 2
+          "edition": 2
         }
       }]
     });
@@ -117,7 +117,7 @@ describe("Testing Server", () => {
         "lang": "en",
         "file": "test",
         "options": {
-          "edtion": "3"
+          "edition": "3"
         }
       }]
     });
@@ -133,13 +133,13 @@ describe("Testing Server", () => {
         "lang": "en",
         "file": "test",
         "options": {
-          "edtion": 3
+          "edition": 3
         }
       }]
     });
     expect(res6.statusCode).to.equal(200);
     expect(res6.result).to.be.an.array().and.to.have.length(1);
-    expect(res6.result[0].edtion).to.equal(3);
+    expect(res6.result[0].edition).to.equal(3);
 
     const res7 = await server.inject({
       method: "POST",
@@ -176,7 +176,7 @@ describe("Testing Server", () => {
     });
     expect(res8.statusCode).to.equal(200);
     expect(res8.result).to.be.an.array().and.to.have.length(1);
-    expect(res8.result[0].edtion).to.be.null();
+    expect(res8.result[0].edition).to.be.null();
     expect(res8.result[0].data).to.be.an.array().and.to.have.length(1);
     expect(res8.result[0].data[0]).to.exist();
 

@@ -6,7 +6,7 @@
   "author": "张丁丁",
   "created_at": "2022-08-05",
   "updated_at": "2022-08-08",
-  "edtion": "1",
+  "edition": "1",
   "tags": ["tag1", "tag2"],
   "about": "https://github.com/jonschlinkert/gray-matter"
 }

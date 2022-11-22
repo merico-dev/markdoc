@@ -4,7 +4,7 @@ import * as Lab from "@hapi/lab";
 
 import {
   splitOnce,
-  deriveFileEdtionFromFileName,
+  deriveFileEditionFromFileName,
   deriveFileSourceAndLangFromFileDir,
 } from "../src/misc.js";
 
@@ -52,45 +52,45 @@ suite("Testing Misc", () => {
     expect(result[1]).to.equal("3@4.md");
   });
 
-  test("deriveFileEdtionFromFileName", () => {
+  test("deriveFileEditionFromFileName", () => {
     let { name: emptyName2 } = path.parse(emptyPath2);
-    let result = deriveFileEdtionFromFileName(emptyName2);
+    let result = deriveFileEditionFromFileName(emptyName2);
     expect(result).to.be.null();
 
     let { name: emptyName3 } = path.parse(emptyPath3);
-    result = deriveFileEdtionFromFileName(emptyName3);
+    result = deriveFileEditionFromFileName(emptyName3);
     expect(result).to.be.null();
 
     let { name: emptyName4 } = path.parse(emptyPath4);
-    result = deriveFileEdtionFromFileName(emptyName4);
+    result = deriveFileEditionFromFileName(emptyName4);
     expect(result).to.be.null();
 
     let { name: emptyName5 } = path.parse(emptyPath5);
-    result = deriveFileEdtionFromFileName(emptyName5);
+    result = deriveFileEditionFromFileName(emptyName5);
     expect(result).to.be.null();
 
     let { name: fullName2 } = path.parse(fullPath2);
-    result = deriveFileEdtionFromFileName(fullName2);
+    result = deriveFileEditionFromFileName(fullName2);
     expect(result).to.be.null();
 
     let { name: fullName3 } = path.parse(fullPath3);
-    result = deriveFileEdtionFromFileName(fullName3);
+    result = deriveFileEditionFromFileName(fullName3);
     expect(result).to.equal(3);
 
     let { name: fullName4 } = path.parse(fullPath4);
-    result = deriveFileEdtionFromFileName(fullName4);
+    result = deriveFileEditionFromFileName(fullName4);
     expect(result).to.be.null();
 
     let { name: fullName5 } = path.parse(fullPath5);
-    result = deriveFileEdtionFromFileName(fullName5);
+    result = deriveFileEditionFromFileName(fullName5);
     expect(result).to.be.null();
 
     let { name: fullName7 } = path.parse(fullPath7);
-    result = deriveFileEdtionFromFileName(fullName7);
+    result = deriveFileEditionFromFileName(fullName7);
     expect(result).to.equal(3);
 
     let { name: fullName8 } = path.parse(fullPath8);
-    result = deriveFileEdtionFromFileName(fullName8);
+    result = deriveFileEditionFromFileName(fullName8);
     expect(result).to.be.null();
   });
 

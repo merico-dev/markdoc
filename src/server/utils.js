@@ -1,4 +1,4 @@
-import { isFileEdtionValid, isFileDirValid } from "../misc.js";
+import { isFileEditionValid, isFileDirValid } from "../misc.js";
 
 export function deriveMarkdownSourceVersionInfoFromManifest(markdownManifest) {
   if (!Array.isArray(markdownManifest) || markdownManifest.length < 1) {
@@ -13,24 +13,24 @@ export function deriveMarkdownSourceVersionInfoFromManifest(markdownManifest) {
   return versionInfo;
 }
 
-export function deriveHTMLDocKeyFromDocInfo(source, lang, file, edtion) {
+export function deriveHTMLDocKeyFromDocInfo(source, lang, file, edition) {
   if (!source || !lang || !file) {
     return null;
   }
   let docKey = `${source}/${lang}/${file}`;
-  if (edtion === undefined || edtion === null) {
+  if (edition === undefined || edition === null) {
     docKey += ".html";
     return docKey;
   }
-  if (isFileEdtionValid(edtion)) {
-    docKey += `@${edtion}.html`;
+  if (isFileEditionValid(edition)) {
+    docKey += `@${edition}.html`;
     return docKey;
   }
   return null;
 }
 
 export function getHTMLDocByDocInfo(htmlDocs, docInfo) {
-  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.source, docInfo.lang, docInfo.file, docInfo.options?.edtion);
+  const docKey = deriveHTMLDocKeyFromDocInfo(docInfo.source, docInfo.lang, docInfo.file, docInfo.options?.edition);
   if (!docKey) {
     return null;
   }

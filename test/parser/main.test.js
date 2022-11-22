@@ -41,7 +41,7 @@ suite("Testing Parser", () => {
     expect(doc).to.exist();
     expect(doc.source).to.equal(markdownSourceKey);
     expect(doc.lang).to.equal("en");
-    expect(doc.edtion).to.equal(3);
+    expect(doc.edition).to.equal(3);
     expect(doc.info.title).to.equal("Manchester by the Sea V3");
     expect(doc.info.release).to.be.a.string();
     expect(new Date(doc.info.release)).to.be.a.date();
@@ -55,7 +55,7 @@ suite("Testing Parser", () => {
     expect(doc).to.exist();
     expect(doc.source).to.equal(markdownSourceKey);
     expect(doc.lang).to.equal("en");
-    expect(doc.edtion).to.be.null();
+    expect(doc.edition).to.be.null();
     expect(doc.info.title).to.equal("Manchester by the Sea");
     expect(doc.info.release).to.be.a.string();
     expect(new Date(doc.info.release)).to.be.a.date();

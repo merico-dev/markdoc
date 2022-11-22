@@ -17,7 +17,7 @@ export function retrieveDocs(criteria, htmlDocs) {
       criterion: item,
       sourceHash: doc.sourceHash,
       lang: doc.lang,
-      edtion: doc.edtion,
+      edition: doc.edition,
       info: doc.info,
       data: queryFragmentsFromHtmlDoc(doc.data, item.options?.sections),
     });

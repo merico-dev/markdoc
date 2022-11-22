@@ -7,7 +7,7 @@ import {
   readFilePathListSync,
   isFileDirValid,
   deriveFileSourceAndLangFromFileDir,
-  deriveFileEdtionFromFileName,
+  deriveFileEditionFromFileName,
 } from "../misc.js";
 
 import { readAndParseFrontMatter } from "./front-matter.js";
@@ -66,7 +66,7 @@ function parseMarkdownDocs(markdownDocs, options = {
     const { relativePath, sourceHash, data } = item;
     const { dir, name } = path.parse(relativePath);
     const [fileSource, fileLang] = deriveFileSourceAndLangFromFileDir(dir);
-    const fileEdtion = deriveFileEdtionFromFileName(name);
+    const fileEdition = deriveFileEditionFromFileName(name);
 
     // parse markdown
     let html = parseMarkdown(data.content);
@@ -80,7 +80,7 @@ function parseMarkdownDocs(markdownDocs, options = {
         source: fileSource,
         "source-hash": sourceHash,
         lang: fileLang,
-        edtion: fileEdtion,
+        edition: fileEdition,
       });
     }
     // minify html
@@ -93,7 +93,7 @@ function parseMarkdownDocs(markdownDocs, options = {
       sourceHash,
       source: fileSource,
       lang: fileLang,
-      edtion: fileEdtion,
+      edition: fileEdition,
       info: data.data,
       data: html,
     });
