@@ -168,7 +168,7 @@ For example, `data-section` here is a legal attribute; `data--section` or `data-
 
 The naming of attribute value follows the above naming rules of custom ID, for example, `synopsis` is a legal name here.
 
-> In fact, our document server has a built-in service for parsing the `data-section` attribute. As long as the `options.sections` attribute is set in the request parameters, the server will return the corresponding document sections when processing the document, as described in the [API documentation](../../doc/api.md). One thing to note is that the value of the `data-section` attribute should ideally be unique within the same document; even if the same `data-section` attribute value is set for multiple document fragments, the server will only return the first document fragment in which the attribute value of the `data-section` occurred.
+> In fact, our document server has a built-in service for parsing the `data-section` attribute. As long as the `options.sections` attribute is set in the request parameters, the server will return the corresponding document sections when processing the document, as described in the API documentation. One thing to note is that the value of the `data-section` attribute should ideally be unique within the same document; even if the same `data-section` attribute value is set for multiple document fragments, the server will only return the first document fragment in which the attribute value of the `data-section` occurred.
 
 ### Others
 
