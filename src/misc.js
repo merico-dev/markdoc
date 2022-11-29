@@ -79,6 +79,9 @@ export function readFilePathListSync(fromPath, extension) {
   const pathList = [];
 
   const traverseFilePath = (startPath) => {
+    if (!fs.existsSync(startPath)) {
+      return;
+    }
     const direntList = fs.readdirSync(startPath, { withFileTypes: true });
     const validDirentList = direntList.filter(item => !isUnixHiddenPath(item.name));
     validDirentList.forEach(item => {

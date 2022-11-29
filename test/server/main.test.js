@@ -139,6 +139,7 @@ describe("Testing Server", () => {
     });
     expect(res6.statusCode).to.equal(200);
     expect(res6.result).to.be.an.array().and.to.have.length(1);
+    expect(res6.result[0]).to.exist();
     expect(res6.result[0].edition).to.equal(3);
 
     const res7 = await server.inject({
@@ -157,6 +158,7 @@ describe("Testing Server", () => {
     });
     expect(res7.statusCode).to.equal(200);
     expect(res7.result).to.be.an.array().and.to.have.length(1);
+    expect(res6.result[0]).to.exist();
     expect(res7.result[0].data).to.be.an.array().and.to.have.length(1);
     expect(res7.result[0].data[0]).to.be.null();
 
@@ -176,6 +178,7 @@ describe("Testing Server", () => {
     });
     expect(res8.statusCode).to.equal(200);
     expect(res8.result).to.be.an.array().and.to.have.length(1);
+    expect(res6.result[0]).to.exist();
     expect(res8.result[0].edition).to.be.null();
     expect(res8.result[0].data).to.be.an.array().and.to.have.length(1);
     expect(res8.result[0].data[0]).to.exist();
