@@ -11,9 +11,6 @@ const CUSTOM_ID_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_ID_MATCH_REGEX, "gi");
 const CUSTOM_KEYWORD_MATCH_REGEX = /\{\[;( ?[a-z_][\w -]*)\]\}/i;
 const CUSTOM_KEYWORD_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_KEYWORD_MATCH_REGEX, "gi");
 
-// const CUSTOM_VAR_MATCH_REGEX = /\{\[@( ?[a-z_][\w ]*)\]\}/i;
-// const CUSTOM_VAR_MATCH_GLOBAL_REGEX = new RegExp(CUSTOM_VAR_MATCH_REGEX, "gi");
-
 function appendCustomAttributes(text) {
   let attr = "";
   let content = text;
