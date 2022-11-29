@@ -3,6 +3,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import yaml from "yaml";
 
+import logger from "./logger.js";
+
 export const FILE_ENCODING = "utf8";
 export const MARKDOWN_SOURCE_INFO_FILE = "md.yaml";
 export const MARKDOWN_SOURCE_LIB_DIR = "md/";
@@ -44,7 +46,7 @@ export function readYamlFile(filePath) {
     const file = fs.readFileSync(filePath, FILE_ENCODING);
     data = yaml.parse(file);
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
   return data;
 }

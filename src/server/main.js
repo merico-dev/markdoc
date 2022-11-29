@@ -1,6 +1,8 @@
 import { Server } from "@hapi/hapi";
 import HapiPino from "hapi-pino";
 
+import logger from "../logger.js";
+
 import { initRouters } from "./router.js";
 
 export function createServer(host = "localhost", port = 3000) {
@@ -32,8 +34,7 @@ async function registerPlugins(serverInstance) {
   await serverInstance.register({
     plugin: HapiPino,
     options: {
-      prettyPrint: false,
-      logEvents: ["response", "onPostStart"],
+      logEvents: ["response"],
     },
   });
 }
@@ -44,7 +45,7 @@ export async function startServer(serverInstance, markdownManifest, allDocs) {
   initRouters(serverInstance);
 
   await serverInstance.start();
-  console.log(`\nServer@${process.env.npm_package_version} running at: ${serverInstance.info.uri}\n`);
+  logger.info(`Server@${process.env.npm_package_version} running at: ${serverInstance.info.uri}`);
 }
 
 // just for testing
@@ -53,5 +54,5 @@ export async function initServer(serverInstance, markdownManifest, allDocs) {
   initRouters(serverInstance);
 
   await serverInstance.initialize();
-  console.log(`\nServer@${process.env.npm_package_version} initialized at: ${serverInstance.info.uri}\n`);
+  logger.info(`Server@${process.env.npm_package_version} initialized at: ${serverInstance.info.uri}`);
 }

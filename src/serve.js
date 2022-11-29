@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 
+import logger from "./logger.js";
 import { getMarkdownManifest } from "./misc.js";
 import { getAllDocsForServing } from "./parser/main.js";
 import { createServer, startServer } from "./server/main.js";
@@ -13,7 +14,7 @@ function run() {
 }
 
 process.on("unhandledRejection", (err) => {
-  console.error(err);
+  logger.fatal(err);
   process.exit(1);
 });
 

@@ -1,6 +1,7 @@
 import path from "path";
 import { keyBy } from "lodash-es";
 
+import logger from "../logger.js";
 import {
   MARKDOWN_SOURCE_LIB_DIR,
   MARKDOWN_EXTENSION,
@@ -27,9 +28,10 @@ function readMarkdownSourceDocs(sourceDocsPath, sourceKey, sourceHash) {
         data: readAndParseFrontMatter(item),
       });
     } catch (err) {
-      console.error(err);
+      logger.error(err);
     }
   });
+  logger.info(`Files from ${sourceKey} have been read: ${filePathList.length} in total, ${docs.length} successful.`);
   return docs;
 }
 
@@ -50,7 +52,7 @@ function readAllMarkdownDocs(manifestFilePath, markdownManifest) {
       const sourceDocs = readMarkdownSourceDocs(libPath, item.key, item.hash);
       docs = docs.concat(sourceDocs);
     } catch (err) {
-      console.error(err);
+      logger.error(err);
     }
   });
   return docs;
@@ -98,6 +100,7 @@ function parseMarkdownDocs(markdownDocs, options = {
       data: html,
     });
   });
+  logger.info(`All docs have been parsed: ${markdownDocs.length} in total, ${htmlDocs.length} successful.`);
   return htmlDocs;
 }
 
