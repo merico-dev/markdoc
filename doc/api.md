@@ -64,7 +64,7 @@ API 解释说明。
 - `file` 表示要获取的文档的标识符，这个 `file` 即是文档的文件名。
 - `options` 可选参数，字段如下：
   - `edition` 表示要获取的文档的版本，如果传入了 `edition`，则 `edition` 必须为正整数（且小于 2^53）。
-  - `sections` 表示要获取文档的哪几部分，这里的 `section` 要和制定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
+  - `sections` 表示要获取文档的哪几部分，这里的 `section` 要和指定文档中的 `data-section` 属性一致。如果不传 `sections` 或 `sections` 为空数组，则表示获取整篇文档。
 
 **返回值**
 
